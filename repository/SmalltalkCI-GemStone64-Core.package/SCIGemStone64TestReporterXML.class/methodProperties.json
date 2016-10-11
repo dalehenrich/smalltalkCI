@@ -1,0 +1,8 @@
+{
+	"class" : {
+		"report:xmlLogDirPath:" : "dkh 10/10/2016 15:25" },
+	"instance" : {
+		"initialize" : "dkh 10/10/2016 15:25",
+		"writeToFile" : "dkh 10/10/2016 15:25",
+		"xmlFilePath" : "dkh 10/10/2016 15:25",
+		"xmlLogDirPath:" : "dkh 10/10/2016 15:25" } }
