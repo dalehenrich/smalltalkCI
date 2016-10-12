@@ -1,0 +1,19 @@
+{
+	"category" : "SmalltalkCI-GemStone64-Core",
+	"classinstvars" : [
+		"PlatformClass" ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "dkh 10/12/2016 09:47",
+	"instvars" : [
+		"url",
+		"user",
+		"password",
+		"packages",
+		"versions",
+		"loadedClasses" ],
+	"name" : "SCIGsCypressLoadSpec",
+	"pools" : [
+		 ],
+	"super" : "SCIAbstractLoadSpec",
+	"type" : "normal" }

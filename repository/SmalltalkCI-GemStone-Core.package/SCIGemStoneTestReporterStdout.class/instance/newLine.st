@@ -1,3 +1,0 @@
-helpers
-newLine
-	stream crlf

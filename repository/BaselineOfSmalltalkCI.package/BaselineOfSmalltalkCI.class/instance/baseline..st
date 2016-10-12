@@ -42,6 +42,12 @@ baseline: spec
           with: [ spec requires: #('SmalltalkCI-Pharo-Core') ];
         yourself.
       spec group: 'tests' with: #('SmalltalkCI-Pharo-Tests') ].
+  spec for: #'gemstoneCommon' do: [ spec
+        package: 'SmalltalkCI-Core'
+          with: [ spec includes: #('SmalltalkCI-GemStoneCommon-Core') ];
+        package: 'SmalltalkCI-GemStoneCommon-Core'
+          with: [ spec requires: #('SmalltalkCI-Core') ];
+        yourself ].
   spec for: #'gemstone64' do: [ spec
         baseline: 'Ston' with: [ spec
                 loads: 'Core';

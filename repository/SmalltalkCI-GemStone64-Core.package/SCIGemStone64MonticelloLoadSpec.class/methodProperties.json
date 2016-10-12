@@ -1,6 +1,0 @@
-{
-	"class" : {
-		"isPlatformCompatible" : "dkh 10/10/2016 15:24" },
-	"instance" : {
-		"extractVersionsFromPackages:" : "dkh 10/10/2016 15:24",
-		"loadVersion:repository:" : "dkh 10/10/2016 15:24" } }
