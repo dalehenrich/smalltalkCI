@@ -63,7 +63,7 @@ baseline: spec
                 requires: 'Ston';
                 includes: #('SmalltalkCI-GemStone64-Core') ];
         package: 'SmalltalkCI-GemStone64-Core'
-          with: [ spec requires: #('SmalltalkCI-Core') ];
+          with: [ spec requires: #('SmalltalkCI-Core' 'SmalltalkCI-GemStoneCommon-Core') ];
         package: 'SmalltalkCI-GemStone64-Tests'
           with: [ spec requires: 'SmalltalkCI-GemStone64-Core' ];
         yourself.
@@ -72,7 +72,7 @@ baseline: spec
         package: 'SmalltalkCI-Core'
           with: [ spec includes: #('SmalltalkCI-GemStone-Core') ];
         package: 'SmalltalkCI-GemStone-Core'
-          with: [ spec requires: #('SmalltalkCI-Core') ];
+          with: [ spec requires: #('SmalltalkCI-Core' 'SmalltalkCI-GemStoneCommon-Core') ];
         package: 'SmalltalkCI-GemStone-Tests'
           with: [ spec requires: 'SmalltalkCI-GemStone-Core' ];
         yourself.
