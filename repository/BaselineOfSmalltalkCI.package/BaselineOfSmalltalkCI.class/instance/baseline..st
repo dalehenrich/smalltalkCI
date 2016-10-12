@@ -47,6 +47,9 @@ baseline: spec
           with: [ spec includes: #('SmalltalkCI-GemStoneCommon-Core') ];
         package: 'SmalltalkCI-GemStoneCommon-Core'
           with: [ spec requires: #('SmalltalkCI-Core') ];
+        yourself.
+      spec
+        group: 'Tests' with: #('tests');
         yourself ].
   spec for: #'gemstone64' do: [ spec
         baseline: 'Ston' with: [ spec
