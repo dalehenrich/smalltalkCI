@@ -2,5 +2,5 @@
 	"class" : {
 		"isPlatformCompatible" : "fn 6/13/2016 09:25" },
 	"instance" : {
-		"extractVersionsFromPackages:" : "dkh 10/12/2016 17:08",
+		"extractVersionsFromPackages:" : "dkh 10/12/2016 17:31",
 		"loadVersion:repository:" : "dkh 10/12/2016 17:19" } }
