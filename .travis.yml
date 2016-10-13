@@ -2,26 +2,26 @@ language: smalltalk
 sudo: false
 
 smalltalk:
-#  - Squeak-trunk
-#  - Squeak-5.1
-#  - Squeak-5.0
-#  - Squeak-4.6
-#  - Squeak-4.5
-#
-#  # - Pharo-alpha   # identical to Pharo-6.0
-#  # - Pharo-stable  # identical to Pharo-5.0
-#  - Pharo-6.0
-#  - Pharo-5.0
-#  - Pharo-4.0
-#  - Pharo-3.0
-#
-#  # - Moose-trunk   # identical to Moose-6.1
-#  - Moose-6.1
-#  - Moose-6.0
+  - Squeak-trunk
+  - Squeak-5.1
+  - Squeak-5.0
+  - Squeak-4.6
+  - Squeak-4.5
+
+  # - Pharo-alpha   # identical to Pharo-6.0
+  # - Pharo-stable  # identical to Pharo-5.0
+  - Pharo-6.0
+  - Pharo-5.0
+  - Pharo-4.0
+  - Pharo-3.0
+
+  # - Moose-trunk   # identical to Moose-6.1
+  - Moose-6.1
+  - Moose-6.0
 
 os:
-#  - linux
-#  - osx
+  - linux
+  - osx
 
 branches:
   except:
@@ -37,34 +37,44 @@ script: $SMALLTALK_CI_HOME/run.sh --debug
 
 matrix:
   include:
-#    # Bash tests
-#    - language: bash
-#      smalltalk:
-#      sudo: false
-#      script: bash tests/all_tests.sh
-#
-#    # Test that smalltalkCI can fail
-#    - smalltalk: Squeak-5.0
-#      smalltalk_config: .smalltalk_fail.ston
-#      os: linux
-#      script:
-#        - $SMALLTALK_CI_HOME/run.sh --debug || export SMALLTALK_CI_FAIL="true"
-#        - if [[ "${SMALLTALK_CI_FAIL}" != "true" ]]; then false; fi
-#    - smalltalk: Pharo-stable
-#      smalltalk_config: .smalltalk_fail.ston
-#      os: linux
-#      script:
-#        - $SMALLTALK_CI_HOME/run.sh --debug || export SMALLTALK_CI_FAIL="true"
-#        - if [[ "${SMALLTALK_CI_FAIL}" != "true" ]]; then false; fi
+    # Bash tests
+    - language: bash
+      smalltalk:
+      sudo: false
+      script: bash tests/all_tests.sh
+
+    # Test that smalltalkCI can fail
+    - smalltalk: Squeak-5.0
+      smalltalk_config: .smalltalk_fail.ston
+      os: linux
+      script:
+        - $SMALLTALK_CI_HOME/run.sh --debug || export SMALLTALK_CI_FAIL="true"
+        - if [[ "${SMALLTALK_CI_FAIL}" != "true" ]]; then false; fi
+    - smalltalk: Pharo-stable
+      smalltalk_config: .smalltalk_fail.ston
+      os: linux
+      script:
+        - $SMALLTALK_CI_HOME/run.sh --debug || export SMALLTALK_CI_FAIL="true"
+        - if [[ "${SMALLTALK_CI_FAIL}" != "true" ]]; then false; fi
 
     # GemStone Linux builds
-    - smalltalk: GemStone-3.3.1
+    - smalltalk: GemStone-3.3.0
       os: linux
       env: GSCI_CLIENTS="Pharo-5.0 Pharo-4.0 Pharo-3.0"
       cache:
         directories:
           - $SMALLTALK_CI_CACHE      # don't use dependency cache with nonstandard GSCI_DEVKIT_BRANCH
-    - smalltalk: GemStone-3.2.15
+    - smalltalk: GemStone-3.3.0
+      smalltalk_config: .smalltalk_fail.ston
+      os: linux
+      env: GSCI_CLIENTS="Pharo-5.0 Pharo-3.0" # latest and oldest clients
+      script:
+        - $SMALLTALK_CI_HOME/run.sh --debug || export SMALLTALK_CI_FAIL="true"
+        - if [[ "${SMALLTALK_CI_FAIL}" != "true" ]]; then false; fi
+      cache:
+        directories:
+          - $SMALLTALK_CI_CACHE      # don't use dependency cache with nonstandard GSCI_DEVKIT_BRANCH
+    - smalltalk: GemStone-3.2.14
       os: linux
       cache:
         directories:
@@ -75,7 +85,7 @@ matrix:
         directories:
           - $SMALLTALK_CI_CACHE      # don't use dependency cache with nonstandard GSCI_DEVKIT_BRANCH
     # GemStone OS X builds
-    - smalltalk: GemStone-3.3.1
+    - smalltalk: GemStone-3.3.0
       os: osx
       cache:
         directories:
