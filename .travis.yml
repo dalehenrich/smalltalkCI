@@ -2,6 +2,7 @@ language: smalltalk
 sudo: false
 
 smalltalk:
+  - GemStone-3.3.1
 #  - Squeak-trunk
 #  - Squeak-5.1
 #  - Squeak-5.0
@@ -74,11 +75,6 @@ matrix:
 #      cache:
 #        directories:
 #          - $SMALLTALK_CI_CACHE      # don't use dependency cache with nonstandard GSCI_DEVKIT_BRANCH
-    - smalltalk: GemStone-3.3.1
-      os: linux
-      cache:
-        directories:
-          - $SMALLTALK_CI_CACHE      # don't use dependency cache with nonstandard GSCI_DEVKIT_BRANCH
     - smalltalk: GemStone-3.2.15
       os: linux
       cache:
@@ -105,3 +101,7 @@ matrix:
     - smalltalk: Pharo-6.0
     - smalltalk: Moose-6.1
   fast_finish: true
+
+cache:
+  directories:
+    - $SMALLTALK_CI_CACHE
