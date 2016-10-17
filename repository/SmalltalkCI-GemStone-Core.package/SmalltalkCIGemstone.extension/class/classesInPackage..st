@@ -1,4 +1,4 @@
-class organization
+*smalltalkci-gemstone-core
 classesInPackage: packageName
 	| package |
 	package := MCWorkingCopy allManagers
