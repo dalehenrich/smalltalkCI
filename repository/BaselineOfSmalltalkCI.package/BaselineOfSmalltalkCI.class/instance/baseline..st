@@ -9,7 +9,8 @@ baseline: spec
           with: [ spec requires: 'SmalltalkCI-Tests' ];
         package: 'SmalltalkCI-AllCases-Tests'
           with: [ spec requires: 'SmalltalkCI-Tests' ];
-        package: 'SmalltalkCI-Excluded-Tests' yourself.
+        package: 'SmalltalkCI-Excluded-Tests';
+        yourself.
       spec
         group: 'default' with: #('Core');
         group: 'Core' with: #('SmalltalkCI-Core');
