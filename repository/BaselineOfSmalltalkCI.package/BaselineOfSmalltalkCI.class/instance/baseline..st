@@ -65,6 +65,11 @@ baseline: spec
                 repository:
                     'gitfiletree://github.com/GsDevKit/ston:gs_port/repository';
                 yourself ];
+        baseline: 'Smalltalk80Compat' with: [ spec
+                loads: 'Core';
+                repository:
+                    'gitfiletree://github.com/GsDevKit/Smalltalk80Compat:master/repository';
+                yourself ];
         yourself.
       spec
         package: 'SmalltalkCI-Core' with: [ spec
