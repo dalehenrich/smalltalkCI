@@ -73,7 +73,7 @@ baseline: spec
         yourself.
       spec
         package: 'SmalltalkCI-Core' with: [ spec
-                requires: 'Ston';
+                requires: #('Ston' 'Smalltalk80Compat');
                 includes: #('SmalltalkCI-GemStone64-Core') ];
         package: 'SmalltalkCI-GemStone64-Core'
           with: [ spec requires: #('SmalltalkCI-Core' 'SmalltalkCI-GemStoneCommon-Core') ];
