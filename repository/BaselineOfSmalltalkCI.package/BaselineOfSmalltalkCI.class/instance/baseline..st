@@ -22,7 +22,10 @@ baseline: spec
         package: 'STON-Tests';
         package: 'SmalltalkCI-Core' with: [ spec
                 requires: #('STON-Core');
-                includes: #('SmalltalkCI-Squeak-Core') ];
+                includes:
+                    #('SmalltalkCI-Squeak-Core' 'SmalltalkCI-Monticello-Core') ];
+        package: 'SmalltalkCI-Monticello-Core'
+          with: [ spec requires: #('SmalltalkCI-Core') ];
         package: 'SmalltalkCI-Squeak-Core'
           with: [ spec requires: #('SmalltalkCI-Core') ];
         package: 'SmalltalkCI-Squeak-Tests'
@@ -37,7 +40,10 @@ baseline: spec
       spec
         package: 'SmalltalkCI-Core' with: [ spec
                 requires: #('Ston');
-                includes: #('SmalltalkCI-Pharo-Core' 'Ston') ];
+                includes:
+                    #('SmalltalkCI-Pharo-Core' 'Ston' 'SmalltalkCI-Monticello-Core') ];
+        package: 'SmalltalkCI-Monticello-Core'
+          with: [ spec requires: #('SmalltalkCI-Core') ];
         package: 'SmalltalkCI-Pharo-Core'
           with: [ spec requires: #('SmalltalkCI-Core') ];
         package: 'SmalltalkCI-Pharo-Tests'
@@ -72,9 +78,12 @@ baseline: spec
       spec group: 'tests' with: #('SmalltalkCI-GemStone64-Tests') ].
   spec for: #'gemstone' do: [ spec
         package: 'SmalltalkCI-Core'
-          with: [ spec includes: #('SmalltalkCI-GemStone-Core') ];
-        package: 'SmalltalkCI-GemStone-Core'
-          with: [ spec requires: #('SmalltalkCI-Core' 'SmalltalkCI-GemStoneCommon-Core') ];
+          with: [ spec includes: #('SmalltalkCI-GemStone-Core' 'SmalltalkCI-Monticello-Core') ];
+        package: 'SmalltalkCI-Monticello-Core'
+          with: [ spec requires: #('SmalltalkCI-Core') ];
+        package: 'SmalltalkCI-GemStone-Core' with: [ spec
+                requires:
+                  #('SmalltalkCI-Monticello-Core' 'SmalltalkCI-GemStoneCommon-Core') ];
         package: 'SmalltalkCI-GemStone-Tests'
           with: [ spec requires: 'SmalltalkCI-GemStone-Core' ];
         yourself.

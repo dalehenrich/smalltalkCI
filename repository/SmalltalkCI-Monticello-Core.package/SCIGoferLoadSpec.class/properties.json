@@ -1,7 +1,7 @@
 {
-	"category" : "SmalltalkCI-Core",
+	"category" : "SmalltalkCI-Monticello-Core",
 	"classinstvars" : [
-		"PlatformClass" ],
+		 ],
 	"classvars" : [
 		 ],
 	"commentStamp" : "",
@@ -12,7 +12,7 @@
 		"packages",
 		"versions",
 		"loadedClasses" ],
-	"name" : "SCIMonticelloLoadSpec",
+	"name" : "SCIGoferLoadSpec",
 	"pools" : [
 		 ],
 	"super" : "SCIAbstractLoadSpec",

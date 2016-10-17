@@ -1,0 +1,1 @@
+(name 'SmalltalkCI-Monticello-Core-dkh.1' message 'Move SCIGoferLoadSpec and SCIMonticelloLoadSpec to new SmalltalkCI-Monticello-Core package ... These two classes are Monticello-specific and are not to be loaded into GemStone base' id '7d2f107c-72c8-4477-9cb8-3b6efc615ab9' date '10/17/2016' time '12:51:02' author 'dkh' ancestors () stepChildren ())
