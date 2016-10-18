@@ -30,8 +30,13 @@ baseline: spec
           with: [ spec requires: #('SmalltalkCI-Core') ];
         package: 'SmalltalkCI-Squeak-Tests'
           with: [ spec requires: #('SmalltalkCI-Squeak-Core') ];
+        package: 'SmalltalkCI-Monticello-Tests'
+          with: [ spec requires: #('SmalltalkCI-Squeak-Tests') ];
         yourself.
-      spec group: 'tests' with: #('SmalltalkCI-Squeak-Tests' 'STON-Tests') ].
+      spec
+        group: 'tests'
+        with:
+          #('SmalltalkCI-Squeak-Tests' 'SmalltalkCI-Monticello-Tests' 'STON-Tests') ].
   spec for: #'pharo' do: [ spec configuration: 'Ston' with: [ spec
             version: #'stable';
             loads: #('Core');
@@ -48,8 +53,12 @@ baseline: spec
           with: [ spec requires: #('SmalltalkCI-Core') ];
         package: 'SmalltalkCI-Pharo-Tests'
           with: [ spec requires: #('SmalltalkCI-Pharo-Core') ];
+        package: 'SmalltalkCI-Monticello-Tests'
+          with: [ spec requires: #('SmalltalkCI-Pharo-Tests') ];
         yourself.
-      spec group: 'tests' with: #('SmalltalkCI-Pharo-Tests') ].
+      spec
+        group: 'tests'
+        with: #('SmalltalkCI-Pharo-Tests' 'SmalltalkCI-Monticello-Tests') ].
   spec for: #'gemstoneCommon' do: [ spec
         package: 'SmalltalkCI-Core'
           with: [ spec includes: #('SmalltalkCI-GemStoneCommon-Core') ];
@@ -91,5 +100,9 @@ baseline: spec
                   #('SmalltalkCI-Monticello-Core' 'SmalltalkCI-GemStoneCommon-Core') ];
         package: 'SmalltalkCI-GemStone-Tests'
           with: [ spec requires: 'SmalltalkCI-GemStone-Core' ];
+        package: 'SmalltalkCI-Monticello-Tests'
+          with: [ spec requires: #('SmalltalkCI-GemStone-Tests') ];
         yourself.
-      spec group: 'tests' with: #('SmalltalkCI-GemStone-Tests') ]
+      spec
+        group: 'tests'
+        with: #('SmalltalkCI-GemStone-Tests' 'SmalltalkCI-Monticello-Tests') ]
