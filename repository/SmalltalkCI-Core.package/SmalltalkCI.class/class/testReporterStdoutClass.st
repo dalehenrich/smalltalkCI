@@ -1,0 +1,3 @@
+compatibility
+testReporterStdoutClass
+	^self platformClass testReporterStdoutClass

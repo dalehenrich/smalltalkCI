@@ -1,0 +1,3 @@
+compatibility
+testReporterXMLClass
+	^self platformClass testReporterXMLClass
