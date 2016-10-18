@@ -75,7 +75,7 @@
 		"travisTime:foldName:on:block:" : "fn 10/10/2016 23:35",
 		"workingDirectory" : "fn 10/16/2016 16:28" },
 	"instance" : {
-		"classesToTest" : "fn 6/22/2016 13:26",
+		"classesToTest" : "dkh 10/18/2016 11:52",
 		"compatibleConfigurationsFor:" : "fn 4/15/2016 10:43",
 		"compatibleLoadSpecs" : "fn 4/15/2016 10:41",
 		"compatibleSpecs" : "fn 4/16/2016 21:19",
@@ -85,6 +85,7 @@
 		"finishUpAfterTesting:" : "fn 10/13/2016 17:34",
 		"finishUpAfterTestingHeadful:" : "fn 10/11/2016 21:15",
 		"finishUpAfterTestingHeadless:" : "fn 10/13/2016 17:34",
+		"initialize" : "dkh 10/17/2016 12:51:02",
 		"isCoverageTestingEnabled" : "fn 10/8/2016 18:48",
 		"load" : "fn 10/14/2016 15:58",
 		"performMetacelloLoad:" : "fn 4/15/2016 10:47",
