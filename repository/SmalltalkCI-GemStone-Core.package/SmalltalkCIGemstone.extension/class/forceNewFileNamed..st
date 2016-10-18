@@ -1,3 +1,3 @@
 *smalltalkci-gemstone-core
 forceNewFileNamed: aFile
-  (GsFile openWriteOnServer: aFile) ifNotNil: [:file | file close].
+  ^BinaryOrTextFile openWriteOnServer: aFile
