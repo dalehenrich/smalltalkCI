@@ -1,3 +1,3 @@
 ansi
 setModeBold
-	self print: SmalltalkCI ansiBold
+	self print: SmalltalkCI platformClass ansiBold

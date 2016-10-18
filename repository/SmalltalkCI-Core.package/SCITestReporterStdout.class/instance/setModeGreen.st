@@ -1,3 +1,3 @@
 ansi
 setModeGreen
-	self print: SmalltalkCI ansiGreen
+	self print: SmalltalkCI platformClass ansiGreen

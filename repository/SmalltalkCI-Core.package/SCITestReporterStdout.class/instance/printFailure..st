@@ -1,3 +1,3 @@
 printing
 printFailure: aResult
-	self printException: aResult color: SmalltalkCI ansiYellow
+	self printException: aResult color: SmalltalkCI platformClass ansiYellow

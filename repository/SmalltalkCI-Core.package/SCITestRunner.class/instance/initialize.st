@@ -1,5 +1,4 @@
 initialize-release
 initialize
-	super initialize.
-	suiteTime := 0 asDuration.
+	suiteTime := Duration seconds: 0.
 	results := Dictionary new
