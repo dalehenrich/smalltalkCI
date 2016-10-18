@@ -2,7 +2,7 @@ running
 runCase: aTestCase
 	| result |
 	result := SCITestRunnerResult new testCase: aTestCase; yourself.
-	result testTime: (SmalltalkCI timeToRun: [
+	result testTime: (SmalltalkCI platformClass timeToRun: [
 		[ aTestCase runCase ]
 			on: Halt , Error, TestFailure
 			do: [ :err |

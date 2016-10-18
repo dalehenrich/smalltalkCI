@@ -1,3 +1,3 @@
 compatibility
 newLine
-	^ String crlf
+	^ String with: Character lf

@@ -6,6 +6,6 @@ readSTONSpec: aFilePath
     startingAt: aFilePath size.
   projectDirectory := aFilePath copyFrom: 1 to: endOfPath.
   [ file := GsFile openReadOnServer: aFilePath.
-    stream := WriteStreamPortable on: (file contents _decodeFromUtf8: false) ]
+    stream := ReadStreamPortable on: (file contents _decodeFromUtf8: false) ]
     ensure: [ file ifNotNil: [ file close ] ].
-  SmalltalkCISpec fromStream: stream
+  self spec: (SmalltalkCISpec fromStream: stream)
