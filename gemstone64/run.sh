@@ -3,12 +3,9 @@
 # of a smalltalkCI build and it is not meant to be executed by itself.
 ################################################################################ 
 
-local CLIENT_NAME="travisClient"
 local DEFAULT_DEVKIT_BRANCH="master"
 local DEFAULT_GS_HOME="${SMALLTALK_CI_BUILD}/GsDevKit_home"
 local DEVKIT_BRANCH="${DEFAULT_DEVKIT_BRANCH}"
-local DEVKIT_CLIENT_NAMES=()
-local DEVKIT_CLIENTS=()
 local DEVKIT_DOWNLOAD="https://github.com/GsDevKit/GsDevKit_home.git"
 local PHARO_CHANGES_FILE="Pharo-3.0.changes"
 local PHARO_IMAGE_FILE="Pharo-3.0.image"
@@ -59,8 +56,6 @@ gemstone::prepare_stone() {
 
   gemstone_version="$(echo $1 | cut -f2 -d-)"
 
-  local gemstone_cached_extent_file="${SMALLTALK_CI_CACHE}/gemstone/extents/${gemstone_version}_extent0.tode.dbf"
-
   if [[ "${USE_DEFAULT_HOME}" = "true" ]]; then
     travis_fold start install_server "Installing server..."
       timer_start
@@ -72,11 +67,7 @@ gemstone::prepare_stone() {
   fi
 
   if ! is_dir "${SMALLTALK_CI_CACHE}/gemstone"; then
-    print_info "Creating GemStone extent cache..." 
-    mkdir "${SMALLTALK_CI_CACHE}/gemstone"
-    if ! is_dir "${SMALLTALK_CI_CACHE}/gemstone/extents"; then
-      mkdir "${SMALLTALK_CI_CACHE}/gemstone/extents"
-    fi
+    print_info "Creating GemStone Pharo cache..." 
     if ! is_dir "${SMALLTALK_CI_CACHE}/gemstone/pharo"; then
       mkdir "${SMALLTALK_CI_CACHE}/gemstone/pharo"
     fi
@@ -134,13 +125,8 @@ gemstone::prepare_stone() {
     if [[ "${TRAVIS_CACHE_ENABLED:-}" = "false" ]]; then
       ${GS_HOME}/bin/createStone ${config_stone_create_arg:-} "${STONE_NAME}" "${gemstone_version}"
     else
-      if ! is_file "${gemstone_cached_extent_file}"; then
-        ${GS_HOME}/bin/createStone ${config_stone_create_arg:-} "${STONE_NAME}" "${gemstone_version}"
-        cp "${GS_HOME}/server/stones/${STONE_NAME}/snapshots/extent0.tode.dbf" ${gemstone_cached_extent_file}
-      else
-        ${GS_HOME}/bin/createStone -t "${gemstone_cached_extent_file}" ${config_stone_create_arg:-} "${STONE_NAME}" "${gemstone_version}"
-      fi
-  
+      ${GS_HOME}/bin/createStone ${config_stone_create_arg:-} "${STONE_NAME}" "${gemstone_version}"
+   
       if ! is_file "${SMALLTALK_CI_CACHE}/gemstone/pharo/gsDevKitCommandLine.image"; then
         cp ${GS_HOME}/shared/pharo/gsDevKitCommandLine.* "${SMALLTALK_CI_CACHE}/gemstone/pharo/"
       fi
@@ -150,57 +136,6 @@ gemstone::prepare_stone() {
   travis_fold end create_stone
 }
 
-################################################################################
-# Optionally create GemStone clients.
-################################################################################
-gemstone::prepare_optional_clients() {
-  local client_version
-  local client_extension
-  local client_name
-
-  if is_empty "${DEVKIT_CLIENTS:-}"; then
-    return
-  fi
-
-  for version in "${DEVKIT_CLIENTS[@]}"
-  do
-    case "${version}" in
-      "Pharo-5.0")
-        client_version="Pharo5.0"
-        client_extension="Pharo5.0"
-        ;;
-      "Pharo-4.0")
-        client_version="Pharo4.0"
-        client_extension="Pharo4.0"
-        ;;
-      "Pharo-3.0")
-        client_version="Pharo3.0"
-        client_extension="Pharo3.0"
-        ;;
-      *)
-        print_error_and_exit "Unsupported client version '${version}'."
-        ;;
-    esac
-
-    client_name="${CLIENT_NAME}_${client_extension}"
-    DEVKIT_CLIENT_NAMES+=( "${client_name}" )
-
-    gemstone::prepare_client "${client_version}" "${client_name}"
-  done
-}
-
-gemstone::prepare_client() {
-  local client_version=$1
-  local client_name=$2
-
- travis_fold start "create_${client_name}" "Creating client ${client_name}..."
-    timer_start
-
-    ${GS_HOME}/bin/createClient -t pharo "${client_name}" -v ${client_version} -s "${STONE_NAME}" -z "${config_ston}"
-
-    timer_finish
-  travis_fold end "create_${client_name}"
-}
 
 ################################################################################
 # Load project into GemStone stone.
@@ -292,23 +227,6 @@ EOF
   fi
   gemstone::check_intermediate_build_status
 
-  if is_not_empty  "${DEVKIT_CLIENT_NAMES:-}"; then
-    for client_name in "${DEVKIT_CLIENT_NAMES[@]}"
-    do
-      travis_wait ${GS_HOME}/bin/startClient ${client_name} -t "${client_name}" -s ${STONE_NAME} -z "${config_ston}" || status=$?
-
-      if is_nonzero "${status}"; then
-        print_error_and_exit "Error while testing client project ${client_name}."
-      fi
-      gemstone::check_intermediate_build_status
-    done
-  fi
-
-  # Overwrite build status file if tests failed on the server or on a client
-  if is_nonzero "${build_status}"; then
-    echo 1 > "${build_status_file}"
-  fi
-
   travis_fold start stop_stone "Stopping stone..."
   ${GS_HOME}/bin/stopStone -b "${STONE_NAME}"
   travis_fold end stop_stone
@@ -334,7 +252,6 @@ run_build() {
 
   gemstone::prepare_gsdevkit_home
   gemstone::prepare_stone "${config_smalltalk}"
-  gemstone::prepare_optional_clients
   gemstone::load_project
   gemstone::test_project
 }
@@ -343,7 +260,6 @@ run_build() {
 # Handle GemStone-specific options.
 ################################################################################
 gemstone::parse_options() {
-  local devkit_client_args
 
   case "$(uname -s)" in
     "Linux"|"Darwin")
@@ -372,9 +288,8 @@ gemstone::parse_options() {
         shift
         ;;
       --gs-CLIENTS=*)
-        devkit_client_args="${1#*=}"
-        shift
-        ;;
+	print_error_and_exit "gs-CLIENTS option not currently supported on GemStone64 (base) platform"
+  	;;
       --gs-*)
         print_error_and_exit "Unknown GemStone-specific option: $1"
         ;;
@@ -386,14 +301,6 @@ gemstone::parse_options() {
         ;;
     esac
   done
-
-  if is_empty "${devkit_client_args:-}" && is_not_empty "${GSCI_CLIENTS:-}"; then
-    devkit_client_args=${GSCI_CLIENTS}
-  fi
-
-  if is_not_empty "${devkit_client_args:-}"; then
-    IFS=' '; read -ra DEVKIT_CLIENTS <<< "${devkit_client_args}"
-  fi
 
   export GS_HOME
 }
