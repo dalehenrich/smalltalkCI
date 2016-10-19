@@ -157,14 +157,13 @@ gemstone::load_project() {
       iferr 3 exit 1
       login
       run
-      GsDeployer bulkMigrate: [
-        Metacello new
-          baseline: 'SmalltalkCI';
-          repository: 'filetree://${SMALLTALK_CI_HOME}/repository';
-          load: 'Core'.
-        System commitTransaction.
-        (Smalltalk at: #SmalltalkCI) load: '${config_ston}'.
-      ].
+      Metacello new
+        baseline: 'SmalltalkCI';
+        repository: 'filetree://${SMALLTALK_CI_HOME}/repository';
+        load: 'Core'.
+      System commitTransaction.
+      (Smalltalk at: #SmalltalkCI) load: '${config_ston}'.
+      System commitTransaction.
 %
       logout
       exit 0
@@ -233,7 +232,7 @@ EOF
 }
 
 ################################################################################
-# Main entry point for GemStone builds.
+# Main entry point for GemStone64 builds.
 ################################################################################
 run_build() {
   gemstone::parse_options "$@"
