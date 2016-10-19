@@ -1,4 +1,4 @@
 initialize-release
 ensureAuthor
-	SmalltalkCI getAuthor ifEmpty: [
+	SmalltalkCI getAuthor isEmpty ifTrue: [
 		self class setAuthor: self class defaultAuthor ]

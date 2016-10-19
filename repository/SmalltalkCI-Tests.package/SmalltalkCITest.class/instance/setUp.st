@@ -1,3 +1,3 @@
 setup
 setUp
-	self sci: SmalltalkCI basicNew initialize
+	self sci: SmalltalkCI newInstance

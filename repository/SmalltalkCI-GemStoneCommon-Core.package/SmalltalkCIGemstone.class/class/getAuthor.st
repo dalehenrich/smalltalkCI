@@ -1,3 +1,3 @@
-helpers
-getAuthor
-  ^ (Smalltalk at: #'MCPlatformSupport') authorInitials
+*smalltalkci-gemstonecommon-core
+getAuthor 
+  ^ MetacelloPlatform current authorName
