@@ -184,7 +184,7 @@ in ${project_home}."
 select_smalltalk() {
   local images="Squeak-trunk Squeak-5.1 Squeak-5.0 Squeak-4.6 Squeak-4.5
                 Pharo-stable Pharo-alpha Pharo-6.0 Pharo-5.0 Pharo-4.0 Pharo-3.0
-                GemStone-3.3.0 GemStone-3.2.12 GemStone-3.1.0.6
+                GemStone-3.3.1 GemStone-3.2.15 GemStone-3.1.0.6
                 Moose-trunk Moose-6.1 Moose-6.0"
 
   if is_travis_build || is_appveyor_build; then
@@ -542,6 +542,10 @@ run() {
     Pharo*|Moose*)
       print_info "Starting Pharo build..."
       source "${SMALLTALK_CI_HOME}/pharo/run.sh"
+      ;;
+    GemStone64*)
+      print_info "Starting GemStone64 build..."
+      source "${SMALLTALK_CI_HOME}/gemstone64/run.sh"
       ;;
     GemStone*)
       print_info "Starting GemStone build..."
