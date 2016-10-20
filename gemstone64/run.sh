@@ -68,6 +68,7 @@ gemstone::prepare_stone() {
 
   if ! is_dir "${SMALLTALK_CI_CACHE}/gemstone"; then
     print_info "Creating GemStone Pharo cache..." 
+    mkdir "${SMALLTALK_CI_CACHE}/gemstone"
     if ! is_dir "${SMALLTALK_CI_CACHE}/gemstone/pharo"; then
       mkdir "${SMALLTALK_CI_CACHE}/gemstone/pharo"
     fi
@@ -118,9 +119,7 @@ gemstone::prepare_stone() {
   travis_fold start create_stone "Creating stone..."
     timer_start
 
-    if is_file "${GS_HOME}/bin/.smalltalkCI_create_arg_supported"; then
-      config_stone_create_arg="-z ${config_ston}"
-    fi
+    config_stone_create_arg="-BG -z ${config_ston}"
 
     if [[ "${TRAVIS_CACHE_ENABLED:-}" = "false" ]]; then
       ${GS_HOME}/bin/createStone ${config_stone_create_arg:-} "${STONE_NAME}" "${gemstone_version}"
