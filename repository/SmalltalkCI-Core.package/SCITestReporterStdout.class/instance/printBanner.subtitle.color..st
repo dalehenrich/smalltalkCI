@@ -6,7 +6,7 @@ printBanner: aTitle subtitle: aSubtitle color: aColor
 	self newLine;
 		setModeBold; print: aColor, separator; newLine;
 		setModeBold; print: aColor, '# ', (self rightPad: aTitle to: textLength), ' #'; newLine.
-	aSubtitle ifNotEmpty: [
+	aSubtitle isEmpty ifFalse: [
 		self setModeBold; print: aColor, '# ', (self rightPad: aSubtitle to: textLength), ' #'; newLine ].
 	self
 		setModeBold; print: aColor, separator; newLine;
