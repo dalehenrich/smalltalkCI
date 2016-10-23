@@ -1,6 +1,6 @@
 printing
 printNotPassingSummary
-	self newLine; printBanner: 'Summary' color: SmalltalkCI ansiRed.
+	self newLine; printBanner: 'Summary' color: SmalltalkCI platformClass ansiRed.
 	runner results keysAndValuesDo: [ :class :results | | notPassing |
 		notPassing := results select: [ :result | result passed not ].
 		notPassing ifNotEmpty: [
