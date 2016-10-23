@@ -44,7 +44,7 @@ print_help() {
     --clean             Clear cache and delete builds.
     -d | --debug        Enable debug mode.
     -h | --help         Show this help text.
-    --headfull          Open vm in headfull mode and do not close image.
+    --headful           Open vm in headful mode and do not close image.
     --install           Install symlink to this smalltalkCI instance.
     -s | --smalltalk    Overwrite Smalltalk image selection.
     --uninstall         Remove symlink to any smalltalkCI instance.
@@ -78,6 +78,12 @@ print_help() {
     $(basename -- $0) -s "Squeak-trunk" --headfull /path/to/project/.smalltalk.ston
 
 EOF
+}
+
+print_config() {
+  for var in ${!config_@}; do
+    echo "${var}=${!var}"
+  done
 }
 
 is_empty() {
@@ -151,8 +157,18 @@ is_spur_image() {
   [[ $((image_format_number>>(spur_bit-1) & 1)) -eq 1 ]]
 }
 
+is_headless() {
+  [[ "${config_headless}" = "true" ]]
+}
+
 debug_enabled() {
   [[ "${config_debug}" = "true" ]]
+}
+
+conditional_debug_halt() {
+  if ! is_headless && debug_enabled; then
+    printf "self halt.\n"
+  fi
 }
 
 download_file() {
@@ -213,6 +229,8 @@ export_coveralls_data() {
     service_name="travis-ci"
   elif is_appveyor_build; then
     service_name="appveyor"
+  else
+    return 0 # Coverage testing only supported on TravisCI and AppVeyor
   fi
 
   cat >"${SMALLTALK_CI_BUILD}/coveralls_data.json" <<EOL
