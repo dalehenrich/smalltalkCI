@@ -5,8 +5,6 @@ runClasses: aCollectionOfClasses named: aSuiteName
   classes := (aCollectionOfClasses
     select: [ :each | (each inheritsFrom: TestCase) and: [ each isAbstract not ] ])
       asSortedCollection: [ :a :b | a name <= b name ].
-  classes isEmpty
-    ifTrue: [ ^ TestResult new ].
   classes
     do: [ :each | each addToSuiteFromSelectors: suite ].
   ^ self runSuite: suite
