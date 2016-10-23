@@ -1,3 +1,3 @@
 strings
 ballot
-	^ (Character value: 10007) asString
+	^ (Character codePoint: 10007) asString

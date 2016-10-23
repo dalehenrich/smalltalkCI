@@ -1,3 +1,3 @@
 strings
 checkMark
-	^ (Character value: 10003) asString
+	^ (Character codePoint: 10003) asString
