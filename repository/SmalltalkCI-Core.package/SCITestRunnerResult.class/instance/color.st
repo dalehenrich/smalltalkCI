@@ -1,6 +1,6 @@
 accessing
 color
-	self errored ifTrue: [ ^ SmalltalkCI ansiRed ].
-	self failed ifTrue: [ ^ SmalltalkCI ansiYellow ].
-	self passedUnexpectedly ifTrue: [ ^ SmalltalkCI ansiYellow ].
-	^ SmalltalkCI ansiGreen
+	self errored ifTrue: [ ^ SmalltalkCI platformClass ansiRed ].
+	self failed ifTrue: [ ^ SmalltalkCI platformClass ansiYellow ].
+	self passedUnexpectedly ifTrue: [ ^ SmalltalkCI platformClass ansiYellow ].
+	^ SmalltalkCI platformClass ansiGreen
