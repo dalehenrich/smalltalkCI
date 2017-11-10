@@ -1,3 +1,3 @@
 helpers
 dirname: aPath
-	^ aPath copyUpToLast: self pathNameDelimiter
+	^ aPath copyUpToLast: self pathNameDelimiter first
