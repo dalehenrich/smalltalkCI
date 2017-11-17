@@ -6,14 +6,15 @@
 		 ],
 	"commentStamp" : "",
 	"instvars" : [
-		"specName",
 		"loading",
 		"testing",
 		"configuring",
 		"preLoading",
 		"postLoading",
 		"preTesting",
-		"postTesting" ],
+		"postTesting",
+		"name",
+		"specName" ],
 	"name" : "SmalltalkCISpec",
 	"pools" : [
 		 ],

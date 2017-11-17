@@ -327,6 +327,7 @@ in `#testing`.
 
 ```javascript
 SmalltalkCISpec {
+  #name : 'My Name', // Name of the SmalltalkCISpec (optional)
   #loading : [
     // List Of Load Specifications...
   ],
@@ -443,8 +444,9 @@ SmalltalkCISpec {
 
     // Other options
     #defaultTimeout : 30, // In seconds (Squeak-only)
-    #hidePassingTests : true, // Hide passing tests when printing to stdout
-    #failOnZeroTests : false // Pass builds that did not run any tests
+    #failOnSCIDeprecationWarnings : false, // Fail if a deprecated smalltalkCI API is used
+    #failOnZeroTests : false, // Pass builds that did not run any tests
+    #hidePassingTests : true // Hide passing tests when printing to stdout
   }
 }
 ```
@@ -621,9 +623,14 @@ problem.
     [OSSubprocess](https://github.com/marianopeck/OSSubprocess),
     [FFICHeaderExtractor](https://github.com/marianopeck/FFICHeaderExtractor).
 - [@newapplesho](https://github.com/newapplesho):
-    [salesforce-smalltalk](https://github.com/newapplesho/salesforce-smalltalk),
+    [aws-sdk-smalltalk](https://github.com/newapplesho/aws-sdk-smalltalk),
+    [elasticsearch-smalltalk](https://github.com/newapplesho/elasticsearch-smalltalk),
+    [mixpanel-smalltalk](https://github.com/newapplesho/mixpanel-smalltalk),
+    [OpenExchangeRates](https://github.com/newapplesho/oxr-smalltalk),
     [pardot-smalltalk](https://github.com/newapplesho/pardot-smalltalk),
-    [Open Exchange Rates](https://github.com/newapplesho/oxr-smalltalk).
+    [salesforce-smalltalk](https://github.com/newapplesho/salesforce-smalltalk),
+    [sendgrid-smalltalk](https://github.com/newapplesho/sendgrid-smalltalk),
+    [twilio-smalltalk](https://github.com/newapplesho/twilio-smalltalk).
 - [@ObjectProfile](https://github.com/ObjectProfile):
     [Roassal2](https://github.com/ObjectProfile/Roassal2).
 - [@pharo-project](https://github.com/pharo-project):
