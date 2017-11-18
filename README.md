@@ -69,11 +69,11 @@ they can take up a lot of space on your drive.*
 
 | [Squeak][squeak] | [Pharo][pharo]     | [GemStone][gemstone] | [Moose][moose] |
 | ---------------- | ------------------ | -------------------- | -------------- |
-| `Squeak-trunk`   | `Pharo(64)-alpha`  | `GemStone-3.3.x`     | `Moose-trunk`  |
-| `Squeak-5.1`     | `Pharo(64)-stable` | `GemStone-3.2.x`     | `Moose-6.1`    |
-| `Squeak-5.0`     | `Pharo(64)-7.0`    | `GemStone-3.1.0.x`   | `Moose-6.0`    |
-| `Squeak-4.6`     | `Pharo(64)-6.1`    | `Gemstone-2.4.x`     |                |
-| `Squeak-4.5`     | `Pharo(64)-6.0`    |                      |                |
+| `Squeak-trunk`   | `Pharo(64)-alpha`  | `GemStone-3.4.x`     | `Moose-trunk`  |
+| `Squeak-5.1`     | `Pharo(64)-stable` | `GemStone-3.3.x`     | `Moose-6.1`    |
+| `Squeak-5.0`     | `Pharo(64)-7.0`    | `GemStone-3.2.x`     | `Moose-6.0`    |
+| `Squeak-4.6`     | `Pharo(64)-6.1`    | `Gemstone-3.1.o.x`   |                |
+| `Squeak-4.5`     | `Pharo(64)-6.0`    | `Gemstone-2.4.x`     |                |
 |                  | `Pharo-5.0`        |                      |                |
 |                  | `Pharo-4.0`        |                      |                |
 |                  | `Pharo-3.0`        |                      |                |
@@ -132,8 +132,9 @@ smalltalk:
   - Pharo64-6.1
   - Pharo64-6.0
 
-  - GemStone-3.3.0
-  - GemStone-3.2.12
+  - GemStone-3.4.0
+  - GemStone-3.3.6
+  - GemStone-3.2.17
   - GemStone-3.1.0.6
 
 # Override `script` to customize smalltalkCI invocation, e.g.:
