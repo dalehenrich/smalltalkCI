@@ -1,0 +1,48 @@
+ RwProjectLoadConfiguration{
+	#name : 'Default',
+	#version : '0.1.0',
+	#definedGroupNames : {
+		'default' : [ 'Core' ],
+		'Core' : [ ],
+		'tests' : [ 'Core' ]
+		},
+	#conditionalPackages : {
+		[ 'common' ] : {
+			'Core' : {
+				#packageNames : [
+					'SmalltalkCI-Core'
+					]
+				},
+			'tests' : {
+				#packageNames : [
+					'SmalltalkCI-Tests',
+					'SmalltalkCI-Excluded-Tests'
+					]
+				}
+			},
+		[ 'gemstone' ] : {
+			'Core' : {
+				#packageNames : [
+					'SmalltalkCI-GemStone-Core'
+					]
+				},
+			'tests' : {
+				#packageNames : [
+					'SmalltalkCI-GemStone-Tests'
+					]
+				}
+			}
+
+		},
+	#conditionalPackageMapSpecs : {
+		'gemstone' : {
+			'SystemUser' : {
+				#defaultSymbolDictName : 'SmalltalkCI'
+				},
+			'allusers' : {
+				#defaultSymbolDictName : 'UserGlobals'
+				}
+			}
+		},
+	#comment : 'Extracted from BaselineOfSmalltalkCI'
+}

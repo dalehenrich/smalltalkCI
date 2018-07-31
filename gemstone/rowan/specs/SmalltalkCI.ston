@@ -1,0 +1,12 @@
+ RwSimpleProjectSpecification{
+	#specName : 'smalltalkCI',
+	#version : '0.2.0',
+	#projectUrl : 'https://github.com/hpi-swa/smalltalkCI',
+	#configsPath : 'gemstone/rowan/configs',
+	#repoPath : 'repository',
+	#specsPath : 'gemstone/rowan/specs',
+	#defaultConfigurationNames : [ 'Default' ],
+	#defaultGroupNames : [ 'Core', 'tests' ],
+	#comment : 'Standard smalltalkCI load specification'
+}
+
