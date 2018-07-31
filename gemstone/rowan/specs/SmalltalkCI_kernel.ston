@@ -1,0 +1,13 @@
+ RwSimpleProjectSpecification{
+	#specName : 'smalltalkCI',
+	#version : '0.2.0',
+	#projectUrl : 'https://github.com/hpi-swa/smalltalkCI',
+	#configsPath : 'gemstone/rowan/configs',
+	#repoPath : 'repository',
+	#specsPath : 'gemstone/rowan/specs',
+	#defaultConfigurationNames : [ 'Default' ],
+	#defaultGroupNames : [ 'kernel' ],
+	#comment : 'Kernel smalltalkCI load specification ... for non-GLASS stones, 
+		this spec should be loaded first.'
+}
+

@@ -1,0 +1,4 @@
+private
+classOrganizer
+
+	^ClassOrganizer new

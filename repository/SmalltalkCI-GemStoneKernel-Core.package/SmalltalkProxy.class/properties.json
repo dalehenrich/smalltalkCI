@@ -1,0 +1,14 @@
+{
+	"category" : "SmalltalkCI-GemStoneKernel-Core",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		 ],
+	"name" : "SmalltalkProxy",
+	"pools" : [
+		 ],
+	"super" : "Object",
+	"type" : "normal" }

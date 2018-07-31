@@ -3,8 +3,9 @@
 	#version : '0.1.0',
 	#definedGroupNames : {
 		'default' : [ 'Core' ],
-		'Core' : [ ],
-		'tests' : [ 'Core' ]
+		'Core' : [ 'kernel' ],
+		'tests' : [ 'Core' ],
+		'kernel' : [ ]
 		},
 	#conditionalPackages : {
 		[ 'common' ] : {
@@ -31,6 +32,15 @@
 					'SmalltalkCI-GemStone-Tests'
 					]
 				}
+			},
+		[ 'gemstone-kernel' ] : {
+			'kernel' : {
+				#packageNames : [
+					'SmalltalkCI-GemStoneKernel-Core'
+					]
+				}
+			},
+		[ 'gemstone-glass' ] : {
 			}
 
 		},
