@@ -6,7 +6,7 @@
 	#repoPath : 'repository',
 	#specsPath : 'gemstone/rowan/specs',
 	#defaultConfigurationNames : [ 'Default' ],
-	#defaultGroupNames : [ 'Core', 'tests' ],
+	#defaultGroupNames : [ 'default', 'tests' ],
 	#comment : 'Standard smalltalkCI load specification'
 }
 
