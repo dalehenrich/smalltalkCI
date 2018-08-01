@@ -1,0 +1,18 @@
+{
+	"class" : {
+		"isAbstract" : "dkh 07/01/2015 11:06" },
+	"instance" : {
+		"generatorClass" : "dkh 07/01/2015 11:09",
+		"setUp" : "dkh 07/01/2015 11:10",
+		"tearDown" : "dkh 07/01/2015 11:08",
+		"testComparison" : "dkh 07/01/2015 11:05",
+		"testComparisonA" : "dkh 07/01/2015 11:05",
+		"testCreation" : "dkh 07/01/2015 11:05",
+		"testCreationEquality" : "dkh 07/01/2015 11:05",
+		"testCreationFromString" : "dkh 07/01/2015 11:05",
+		"testCreationFromStringNotNil" : "dkh 07/01/2015 11:05",
+		"testCreationNil" : "dkh 07/01/2015 11:05",
+		"testCreationNodeBased" : "dkh 07/01/2015 11:05",
+		"testDuplicationsKinda" : "dkh 07/01/2015 11:05",
+		"testOrder" : "dkh 07/01/2015 11:05",
+		"testUniqueness" : "dkh 07/01/2015 11:05" } }

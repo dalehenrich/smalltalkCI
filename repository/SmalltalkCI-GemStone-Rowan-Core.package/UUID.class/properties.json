@@ -1,0 +1,14 @@
+{
+	"category" : "SmalltalkCI-GemStone-Rowan-Core",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		"GeneratorClass" ],
+	"commentStamp" : "",
+	"instvars" : [
+		 ],
+	"name" : "UUID",
+	"pools" : [
+		 ],
+	"super" : "ByteArray",
+	"type" : "bytes" }

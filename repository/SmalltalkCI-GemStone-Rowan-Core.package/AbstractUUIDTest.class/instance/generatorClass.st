@@ -1,0 +1,3 @@
+running
+generatorClass
+  self subclassResponsibility

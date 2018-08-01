@@ -1,0 +1,14 @@
+{
+	"category" : "SmalltalkCI-GemStone-Rowan-Core",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		 ],
+	"name" : "FastUUIDTest",
+	"pools" : [
+		 ],
+	"super" : "AbstractUUIDTest",
+	"type" : "normal" }

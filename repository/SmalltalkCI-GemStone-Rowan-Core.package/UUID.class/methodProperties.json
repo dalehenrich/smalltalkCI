@@ -1,0 +1,19 @@
+{
+	"class" : {
+		"_generatorClass" : "dkh 07/01/2015 11:09",
+		"fromString:" : "dkh 06/05/2007 21:30",
+		"generatorClass" : "dkh 07/01/2015 11:10",
+		"generatorClass:" : "dkh 07/01/2015 11:15",
+		"nilUUID" : "dkh 06/05/2007 21:30" },
+	"instance" : {
+		"<" : "dkh 07/01/2015 10:16",
+		"<=" : "sig 01/03/2009 12:10",
+		">" : "sig 01/03/2009 12:09",
+		">=" : "sig 01/03/2009 12:10",
+		"asString" : "dkh 06/05/2007 21:30",
+		"asString36" : "JohanBrichau 06/22/2013 09:25",
+		"asUUID:" : "dkh 06/05/2007 21:30",
+		"isNilUUID" : "dkh 07/01/2015 10:21",
+		"printHexAt:to:" : "dkh 06/05/2007 21:30",
+		"printOn:" : "dkh 06/05/2007 21:30",
+		"printString" : "dkh 06/05/2007 21:30" } }

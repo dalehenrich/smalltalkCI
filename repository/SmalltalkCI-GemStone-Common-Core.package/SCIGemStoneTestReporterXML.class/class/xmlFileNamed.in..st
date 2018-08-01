@@ -3,7 +3,7 @@ xmlFileNamed: aName in: aPath
   | fileName |
   fileName := aName, '.xml'.
   aPath ifNotNil: [
-	^ aPath, SmalltalkCIGemstone pathNameDelimiter, fileName ].
+	^ aPath, SmalltalkCI pathNameDelimiter, fileName ].
   ^ ((Smalltalk at: #System) gemEnvironmentVariable: 'SMALLTALK_CI_BUILD')
-    ifNotNil: [ :smalltalk_ci_build | smalltalk_ci_build , SmalltalkCIGemstone pathNameDelimiter, fileName ]
+    ifNotNil: [ :smalltalk_ci_build | smalltalk_ci_build , SmalltalkCI pathNameDelimiter, fileName ]
     ifNil: [ fileName ]

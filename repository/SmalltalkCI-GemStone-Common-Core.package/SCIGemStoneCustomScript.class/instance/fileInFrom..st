@@ -1,3 +1,3 @@
 executing
 fileInFrom: aDirectory
-	(BinaryOrTextFile openRead: aDirectory, SmalltalkCI pathNameDelimiter, self path) fileIn
+	((Smalltalk at: #BinaryOrTextFile) openRead: aDirectory, SmalltalkCI pathNameDelimiter, self path) fileIn
