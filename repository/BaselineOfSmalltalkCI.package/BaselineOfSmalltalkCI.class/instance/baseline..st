@@ -5,7 +5,10 @@ baseline: spec
 		for: #'common'
 		do: [ 
 			spec
-				package: 'SmalltalkCI-Core';
+				package: 'SmalltalkCI-Core'
+					with: [ spec includes: #( 'SmalltalkCI-Monticello-Core' ) ];
+			package: 'SmalltalkCI-Monticello-Core'
+					with: [ spec requires: #( 'SmalltalkCI-Core' ) ];
 				package: 'SmalltalkCI-Excluded-Tests';
 				package: 'SmalltalkCI-Tests'
 					with: [ spec requires: #('SmalltalkCI-Core' 'SmalltalkCI-Excluded-Tests') ];
@@ -69,8 +72,10 @@ baseline: spec
 		do: [ 
 			spec
 				package: 'SmalltalkCI-Core'
-					with: [ spec includes: #('SmalltalkCI-GemStone-Core') ];
+					with: [ spec includes: #('SmalltalkCI-GemStone-Core' 'SmalltalkCI-GemStone-Monticello-Core') ];
 				package: 'SmalltalkCI-GemStone-Core'
+					with: [ spec requires: #('SmalltalkCI-Core') ];
+				package: 'SmalltalkCI-GemStone-Monticello-Core'
 					with: [ spec requires: #('SmalltalkCI-Core') ];
 				package: 'SmalltalkCI-GemStone-Tests'
 					with: [ spec requires: 'SmalltalkCI-GemStone-Core' ];
