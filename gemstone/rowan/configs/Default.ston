@@ -45,11 +45,6 @@
 				}
 			},
 		[ 'gemstone-glass' ] : {
-			'default' : {
-				#packageNames : [
-					'SmalltalkCI-GemStone-Core'
-					]
-				}
 			}
 
 		},

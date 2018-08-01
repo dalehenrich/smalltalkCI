@@ -77,12 +77,12 @@ baseline: spec
 		do: [ 
 			spec
 				package: 'SmalltalkCI-Core'
-					with: [ spec includes: #('SmalltalkCI-GemStone-Core' 'SmalltalkCI-GemStone-Monticello-Core') ];
-				package: 'SmalltalkCI-GemStone-Core'
+					with: [ spec includes: #('SmalltalkCI-GemStone-Common-Core' 'SmalltalkCI-GemStone-Monticello-Core') ];
+				package: 'SmalltalkCI-GemStone-Common-Core'
 					with: [ spec requires: #('SmalltalkCI-Core') ];
 				package: 'SmalltalkCI-GemStone-Monticello-Core'
 					with: [ spec requires: #('SmalltalkCI-Core') ];
 				package: 'SmalltalkCI-GemStone-Tests'
-					with: [ spec requires: 'SmalltalkCI-GemStone-Core' ];
+					with: [ spec requires: 'SmalltalkCI-GemStone-Common-Core' ];
 				yourself.
 	spec group: 'tests' with: #('SmalltalkCI-GemStone-Tests') ]

@@ -1,5 +1,5 @@
 {
-	"category" : "SmalltalkCI-GemStone-Common-Core",
+	"category" : "SmalltalkCI-GemStone-Rowan-Core",
 	"classinstvars" : [
 		 ],
 	"classvars" : [
@@ -7,8 +7,8 @@
 	"commentStamp" : "",
 	"instvars" : [
 		 ],
-	"name" : "SCIGemStoneTestReporterXML",
+	"name" : "SmalltalkCIRowan",
 	"pools" : [
 		 ],
-	"super" : "SCITestReporterXML",
+	"super" : "SmalltalkCIAbstractGemstone",
 	"type" : "normal" }

@@ -6,9 +6,10 @@
 		 ],
 	"commentStamp" : "",
 	"instvars" : [
-		 ],
-	"name" : "SCIGemStoneTestReporterXML",
+		"produceXMLLog",
+		"xmlLogDirPath" ],
+	"name" : "SmalltalkCIAbstractGemstone",
 	"pools" : [
 		 ],
-	"super" : "SCITestReporterXML",
+	"super" : "SmalltalkCI",
 	"type" : "normal" }
