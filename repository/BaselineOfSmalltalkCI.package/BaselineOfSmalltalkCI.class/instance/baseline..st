@@ -7,11 +7,16 @@ baseline: spec
 			spec
 				package: 'SmalltalkCI-Core'
 					with: [ spec includes: #( 'SmalltalkCI-Monticello-Core' ) ];
-			package: 'SmalltalkCI-Monticello-Core'
+				package: 'SmalltalkCI-Monticello-Core'
 					with: [ spec requires: #( 'SmalltalkCI-Core' ) ];
 				package: 'SmalltalkCI-Excluded-Tests';
 				package: 'SmalltalkCI-Tests'
-					with: [ spec requires: #('SmalltalkCI-Core' 'SmalltalkCI-Excluded-Tests') ];
+					with: [ 
+						spec 
+							requires: #('SmalltalkCI-Core' 'SmalltalkCI-Excluded-Tests');
+							includes: #('SmalltalkCI-Monticello-Tests') ];
+				package: 'SmalltalkCI-Monticello-Tests'
+					with: [ spec requires: #( 'SmalltalkCI-Tests' ) ];
 				yourself.
 			spec
 				group: 'default' with: #('SmalltalkCI-Core');

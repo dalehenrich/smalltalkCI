@@ -1,4 +1,4 @@
-testing
+*smalltalkci-monticello-tests
 testAddSpecs
 	self assert: 0 equals: (self spec loading size).
 	self spec addLoadSpec: SCIAbstractLoadSpec new.

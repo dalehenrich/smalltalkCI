@@ -1,4 +1,4 @@
-testing
+*smalltalkci-monticello-tests
 testClassesToTest
 	| classes |
 	self spec: (SmalltalkCISpec new testing: (Dictionary new

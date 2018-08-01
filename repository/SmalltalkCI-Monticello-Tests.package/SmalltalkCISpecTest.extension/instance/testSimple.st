@@ -1,4 +1,4 @@
-testing
+*smalltalkci-monticello-tests
 testSimple
 	self spec
 		configuring: OrderedCollection new;
