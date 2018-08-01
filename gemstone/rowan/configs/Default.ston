@@ -4,7 +4,8 @@
 	#definedGroupNames : {
 		'default' : [ 'kernel' ],
 		'tests' : [ 'default' ],
-		'kernel' : [ ]
+		'kernel' : [ ],
+		'globals' : [ ]
 		},
 	#conditionalPackages : {
 		[ 'common' ] : {
@@ -38,6 +39,11 @@
 					'SmalltalkCI-GemStone-Rowan-Core'
 					]
 				},
+			'globals' : {
+				#packageNames : [
+					'SmalltalkCI-GemStone-Rowan-Kernel'
+					]
+				},
 			'kernel' : {
 				#packageNames : [
 					'SmalltalkCI-GemStone-Kernel-Core'
@@ -51,7 +57,10 @@
 	#conditionalPackageMapSpecs : {
 		'gemstone' : {
 			'SystemUser' : {
-				#defaultSymbolDictName : 'SmalltalkCI'
+				#defaultSymbolDictName : 'SmalltalkCI',
+				#packageNameToPlatformPropertiesMap : {
+					'SmalltalkCI-GemStone-Rowan-Kernel' : { 'symbolDictName' : 'Globals' }
+					}
 				},
 			'allusers' : {
 				#defaultSymbolDictName : 'UserGlobals'

@@ -31,6 +31,23 @@ startTopaz $GEMSTONE_NAME -l << EOF
 %
   commit
 
+  logout
+
+  set user SystemUser p swordfish
+  login
+
+  run
+  Rowan projectTools load
+    loadProjectFromSpecUrl: 'file:$ROWAN_PROJECTS_HOME/smalltalkCI/gemstone/rowan/specs/SmalltalkCI_globals.ston'
+    projectRootPath: '$ROWAN_PROJECTS_HOME/smalltalkCI'.
+%
+  commit
+
+  logout
+
+  set user DataCurator p swordfish
+  login
+
   run
 	| suite res strm |
 	suite := TestSuite named: 'Rowan tests'.
