@@ -31,6 +31,32 @@ startTopaz $GEMSTONE_NAME -l << EOF
 %
   commit
 
+  run
+	| suite res strm |
+	suite := TestSuite named: 'Rowan tests'.
+	#( 'SCIAbstractConfigTest' 
+	'SCIGemStoneServerConfigSpecTest' 
+	'SCIAbstractLoadSpecTest'
+	'SCICustomScriptTest'
+	'SmalltalkCISpecTest'
+	'SCITestReporterStdoutTest'
+	'SCITestReporterXMLTest'
+	'SCITestRunnerTest'
+	'SmalltalkCITest'
+	) do: [ :clName | suite addTests: (Rowan globalNamed: clName) suite tests ].
+	res := suite run.
+
+	strm := WriteStream on: String new.
+	strm nextPutAll: res printString; lf.
+	strm nextPutAll: '  errors'; lf.
+	(res errors collect: [:each | each printString ]) asArray sort do: [:each |
+		strm tab; nextPutAll: each; lf].
+	strm nextPutAll: '  failures'; lf.
+	(res failures collect: [:each | each printString]) asArray sort do: [:each |
+		strm tab; nextPutAll: each; lf].
+	strm contents
+%
+
   exit
 EOF
 
