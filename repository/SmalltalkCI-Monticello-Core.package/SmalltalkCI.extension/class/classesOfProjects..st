@@ -1,4 +1,4 @@
-class organization
+*smalltalkci-monticello-core
 classesOfProjects: projectList
   | classes |
   classes := Set new.
