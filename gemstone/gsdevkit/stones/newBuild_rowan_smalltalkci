@@ -21,7 +21,7 @@ startTopaz $GEMSTONE_NAME -l << EOF
   Rowan projectTools load
     loadProjectFromSpecUrl: 'file:$ROWAN_PROJECTS_HOME/smalltalkCI/gemstone/rowan/specs/SmalltalkCI_kernel.ston'.
   Rowan projectTools browser 
-    addRowanSymbolDictionariesToPeristentSymbolList. 
+    addRowanSymbolDictionariesToPersistentSymbolList. 
 %
   commit
 
@@ -60,6 +60,7 @@ startTopaz $GEMSTONE_NAME -l << EOF
 	'SCITestReporterXMLTest'
 	'SCITestRunnerTest'
 	'SmalltalkCITest'
+	'FastUUIDTest'
 	) do: [ :clName | suite addTests: (Rowan globalNamed: clName) suite tests ].
 	res := suite run.
 
