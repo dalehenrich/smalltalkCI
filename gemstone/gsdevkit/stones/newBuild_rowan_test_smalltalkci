@@ -45,6 +45,27 @@ startTopaz $GEMSTONE_NAME -l << EOF
 
   logout
 
+  set user DataCurator p swordfish
+  login
+
+  run
+	| suite strm res |
+	suite := Rowan projectTools test testSuiteForProjectsNamed: #( 'smalltalkCI' "'Rowan' 'STON' 'Cypress' 'Tonel'" ).
+	res := suite run.
+	strm := WriteStream on: String new.
+  strm nextPutAll: suite name; lf.
+	strm nextPutAll: res printString; lf.
+	strm nextPutAll: '  errors'; lf.
+	(res errors collect: [:each | each printString ]) asArray sort do: [:each |
+		strm tab; nextPutAll: each; lf].
+	res failures size = 0
+		ifTrue: [ ^ strm contents ].
+	strm nextPutAll: '  failures'; lf.
+		(res failures collect: [:each | each printString]) asArray sort do: [:each |
+		strm tab; nextPutAll: each; lf].
+	strm contents
+%
+
   exit
 EOF
 
