@@ -27,7 +27,8 @@ startTopaz $GEMSTONE_NAME -l << EOF
 
   run
   Rowan projectTools load
-    loadProjectFromSpecUrl: 'file:$ROWAN_PROJECTS_HOME/smalltalkCI/gemstone/rowan/specs/SmalltalkCI.ston'.
+    loadProjectNamed: 'smalltalkCI'
+		withGroupNames: #('default').
 %
   commit
 
