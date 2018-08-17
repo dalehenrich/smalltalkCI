@@ -57,7 +57,6 @@
 	#conditionalPackageMapSpecs : {
 		'gemstone' : {
 			'SystemUser' : {
-				#defaultSymbolDictName : 'SmalltalkCI',
 				#packageNameToPlatformPropertiesMap : {
 					'SmalltalkCI-GemStone-Rowan-Kernel' : { 'symbolDictName' : 'Globals' }
 					}

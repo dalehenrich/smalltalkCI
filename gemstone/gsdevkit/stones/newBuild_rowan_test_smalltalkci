@@ -15,13 +15,16 @@ startTopaz $GEMSTONE_NAME -l << EOF
   iferr 3 exit
 
   set user DataCurator p swordfish
+  set user SystemUser p swordfish
   login
 
   run
   Rowan projectTools load
     loadProjectFromSpecUrl: 'file:$ROWAN_PROJECTS_HOME/smalltalkCI/gemstone/rowan/specs/SmalltalkCI_kernel.ston'.
-  Rowan projectTools browser 
-    addRowanSymbolDictionariesToPersistentSymbolList. 
+  false ifTrue: [
+		"do this for DataCurator"
+		Rowan projectTools browser 
+    	addRowanSymbolDictionariesToPersistentSymbolList ]. 
 %
   commit
 
@@ -46,6 +49,7 @@ startTopaz $GEMSTONE_NAME -l << EOF
   logout
 
   set user DataCurator p swordfish
+  set user SystemUser p swordfish
   login
 
   run
