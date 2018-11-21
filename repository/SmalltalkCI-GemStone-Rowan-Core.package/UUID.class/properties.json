@@ -4,11 +4,14 @@
 		 ],
 	"classvars" : [
 		"GeneratorClass" ],
-	"commentStamp" : "",
+	"gs_constraints" : [
+		 ],
+	"gs_options" : [
+		 ],
 	"instvars" : [
 		 ],
 	"name" : "UUID",
 	"pools" : [
 		 ],
 	"super" : "ByteArray",
-	"type" : "bytes" }
+	"type" : "normal" }

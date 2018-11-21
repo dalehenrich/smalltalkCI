@@ -4,7 +4,10 @@
 		"PlatformClass" ],
 	"classvars" : [
 		 ],
-	"commentStamp" : "",
+	"gs_constraints" : [
+		 ],
+	"gs_options" : [
+		 ],
 	"instvars" : [
 		"path" ],
 	"name" : "SCICustomScript",

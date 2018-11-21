@@ -6,7 +6,10 @@
 		"DeprecationWarnings" ],
 	"classvars" : [
 		 ],
-	"commentStamp" : "",
+	"gs_constraints" : [
+		 ],
+	"gs_options" : [
+		 ],
 	"instvars" : [
 		"projectDirectory",
 		"coverageWrappers" ],
