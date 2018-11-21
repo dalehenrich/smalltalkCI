@@ -1,3 +1,0 @@
-comparing
-> uuid
-	^ uuid < self

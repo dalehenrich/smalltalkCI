@@ -1,3 +1,0 @@
-running
-generatorClass
-  ^ FastUUIDGenerator
