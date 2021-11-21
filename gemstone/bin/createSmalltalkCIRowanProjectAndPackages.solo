@@ -88,6 +88,8 @@ doit
 	componentName := 'Core'.
 	commonPackageNames := 	{
 			'SmalltalkCI-Core'.
+			'SmalltalkCI-GemStone-Core'.
+			'SmalltalkCI-Tests'.
 		}.
 
 	(self rowanProjectsHome asFileReference / projectName / 'gemstone' / 'rowan') ensureDeleteAll.

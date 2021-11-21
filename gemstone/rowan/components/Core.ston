@@ -4,7 +4,9 @@ RwSimpleProjectLoadComponentV2 {
 	#projectNames : [ ],
 	#componentNames : [ ],
 	#packageNames : [
-		'SmalltalkCI-Core'
+		'SmalltalkCI-Core',
+		'SmalltalkCI-GemStone-Core',
+		'SmalltalkCI-Tests'
 	],
 	#comment : ''
 }
