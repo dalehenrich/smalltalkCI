@@ -1,0 +1,11 @@
+RwProjectSpecificationV2 {
+	#specName : 'project',
+	#projectSpecPath : 'gemstone/rowan',
+	#componentsPath : 'gemstone/rowan/components',
+	#packagesPath : 'gemstone/rowan/tonel',
+	#projectsPath : 'gemstone/rowan/projects',
+	#specsPath : 'gemstone/rowan/specs',
+	#packageFormat : 'tonel',
+	#packageConvention : 'Monticello',
+	#comment : ''
+}

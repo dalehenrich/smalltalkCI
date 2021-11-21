@@ -3,7 +3,7 @@
 #
 options
 {
-	SuperDoitRequiredOptionWithRequiredArg long: 'rowanProjectsHome'.
+  SuperDoitOptionalOptionWithRequiredArg long: 'rowanProjectsHome' default: '$ROWAN_PROJECTS_HOME'.
 }
 %
 # Example options section
@@ -27,13 +27,18 @@ usage
 -----
 USAGE
       # with GS_HOME env var set
-      $basename [--help | -h] [--debug | -D]
+      $basename [--help | -h] [--debug | -D] [-- [<stone-name> [<topaz-command-line-args>] ] ]
       # with GEMSTONE env var set
-      $basename [--help | -h] [--debug | -D]
+      $basename [--help | -h] [--debug | -D] --  -l -I <path-to-.topazini-file>
 
 DESCRIPTION
-  Script to create the Rowan project metadata for the sm,alltalkCI project ... include pharo-specific
-  packages in the Rowan project, so that repackaging can be done programmatically.
+  Script to create the Rowan project metadata for the OrderedDictionary project.
+  
+	This project is using filetree with Monticello metadata and Rowan does not write
+  Monticello metadata, so in the short term I will write things out in tonel format;
+  and then merge in the latest OrderedDictionary work from Pharo (in tonel format)
+	remove Monticello metadata from the filetree packages and recopy the code back to
+	filetree.
 
 OPTIONS
   <stone-name>               Name of the GsDevKit_home stone. <stone-name> argument
@@ -45,41 +50,21 @@ OPTIONS
   -D, --debug                bring up topaz debugger in the event of a script error
 
 EXAMPLES
-  $basename -h
+  $basename -h -- rowan_361
+  $basename -h -- -l -I .topazini
 
-  $basename -D --rowanProjectsHome=$GS_HOME/shared/repos
-  $basename --rowanProjectsHome=$GS_HOME/shared/repos
+  $basename -D -- rowan_361
+  $basename -D -- -l -I .topazini
+
+  $basename -- rowan_361
+  $basename -- -l -I .topazini
 -----
 %
-doit
-	| projectName componentName commonPackageNames gemstonePackageNames
-		gemstoneTestPackageNames definedProject pharoComponent testPackageNames 
-		testsComponent gemstoneComponent gemstoneTestsComponent resolvedProject |
-
-	projectName := 'smalltalkCI'.
-	componentName := 'Core'.
-	commonPackageNames := 	{
-			'SmalltalkCI-Core' .
-			'SmalltalkCI-Excluded-Tests' .
-		}.
-	gemstonePackageNames := 	{
-			'SmalltalkCI-GemStone-Core' .
-		}.
-	testPackageNames := { 
-			'SmalltalkCI-Tests'	.
-		}.
-	gemstoneTestPackageNames := {
-			'SmalltalkCI-GemStone-Tests' .
-		}.
-
-	('$ROWAN_PROJECTS_HOME' asFileReference / projectName / 'gemstone' / 'rowan') ensureDeleteAll.
-
-	definedProject := Rowan newProjectNamed: projectName.
-	definedProject
+method
+definedProjectForCommon: projectName
+	^ (Rowan newProjectNamed: projectName)
 		gemstoneSetDefaultSymbolDictNameTo: 'Globals';
 		repoType: #git;	
-		customConditionalAttributes: #('tests' );
-		packageFormat: 'filetree';
 		packageConvention: 'Monticello';
 		projectSpecPath: 'gemstone/rowan';	
 		projectsPath: 'gemstone/rowan/projects';
@@ -89,57 +74,51 @@ doit
 		packagesPath: 'repository';
 		componentsPath: 'gemstone/rowan/components';
 		yourself.
+%
+method
+definedProjectForFiletree: projectName
+	^ (self definedProjectForCommon: projectName)
+		packageFormat: 'filetree';
+		yourself.
+%
+doit
+	| projectName componentName commonPackageNames definedProject resolvedProject projectDefinition |
+
+	projectName := 'smalltalkCI'.
+	componentName := 'Core'.
+	commonPackageNames := 	{
+			'SmalltalkCI-Core'.
+		}.
+
+	(self rowanProjectsHome asFileReference / projectName / 'gemstone' / 'rowan') ensureDeleteAll.
+
+	definedProject := self definedProjectForFiletree: projectName.
 	definedProject addTopLevelComponentNamed: componentName.
 	commonPackageNames do: [:packageName |
 			definedProject 
 				addPackageNamed: packageName
 				toComponentNamed: componentName ].
-
-	testsComponent := definedProject
-		addSimpleNestedComponentNamed: 'tests/tests' 
-		condition: 'tests' 
-		comment: ''.
-	testPackageNames do: [:packageName |
-			definedProject 
-				addPackageNamed: packageName
-				toComponentNamed: testsComponent name ].
-	definedProject 
-		addComponentNamed: testsComponent name 
-		toComponentNamed: componentName.
-
-	gemstoneComponent := definedProject
-		addSimpleNestedComponentNamed: 'gemstone/gemstone' 
-		condition: 'gemstone' 
-		comment: ''.
-	gemstonePackageNames do: [:packageName |
-			definedProject 
-				addPackageNamed: packageName
-				toComponentNamed: gemstoneComponent name ].
-	definedProject 
-		addComponentNamed: gemstoneComponent name 
-		toComponentNamed: componentName.
-
-	gemstoneTestsComponent := definedProject
-		addSimpleNestedComponentNamed: 'tests/gemstone/gemstone' 
-		condition: 'gemstone' 
-		comment: ''.
-	gemstoneTestPackageNames do: [:packageName |
-			definedProject 
-				addPackageNamed: packageName
-				toComponentNamed: gemstoneTestsComponent name ].
-	definedProject 
-		addComponentNamed: gemstoneTestsComponent name 
-		toComponentNamed: testsComponent name.
-
-	resolvedProject := definedProject resolve.	"create or attach to existing repository"
+	
+	resolvedProject := definedProject resolve _resolvedProject.
 	Rowan projectTools createV2
 		createResolvedProjectRepository: resolvedProject repository.
-	resolvedProject _resolvedProject 
+	resolvedProject 
 		exportProjectSpecification;
 		exportProjects;
 		exportComponents;
-		exportLoadSpecification;
-		yourself.			"write all rowan metadata except packages"
+		yourself.
+	resolvedProject read.
+	projectDefinition := resolvedProject _projectDefinition copy.
+
+	"convert to tonel packages and write"
+	definedProject
+		packageFormat: 'tonel';
+		packagesPath: 'gemstone/rowan/tonel';
+		yourself.
+
+	resolvedProject := definedProject resolve.
+	resolvedProject _resolvedProject _projectDefinition: projectDefinition.
+	resolvedProject write.
 
 	^ self noResult
 %
