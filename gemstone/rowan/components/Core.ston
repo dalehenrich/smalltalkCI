@@ -5,6 +5,7 @@ RwSimpleProjectLoadComponentV2 {
 	#componentNames : [ ],
 	#packageNames : [
 		'SmalltalkCI-Core',
+		'SmalltalkCI-Excluded-Tests',
 		'SmalltalkCI-GemStone-Core',
 		'SmalltalkCI-Tests'
 	],

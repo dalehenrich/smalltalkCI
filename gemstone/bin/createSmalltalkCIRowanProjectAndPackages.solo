@@ -90,6 +90,7 @@ doit
 			'SmalltalkCI-Core'.
 			'SmalltalkCI-GemStone-Core'.
 			'SmalltalkCI-Tests'.
+			'SmalltalkCI-Excluded-Tests'.
 		}.
 
 	(self rowanProjectsHome asFileReference / projectName / 'gemstone' / 'rowan') ensureDeleteAll.
