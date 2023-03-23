@@ -2,13 +2,5 @@
 	"class" : {
 		 },
 	"instance" : {
-		"flush" : "dkh 03/23/2023 11:13",
 		"newLine" : "fn 9/29/2016 16:26",
-		"print:" : "fn 9/29/2016 16:10",
-		"printBanner:subtitle:color:" : "dkh 03/23/2023 11:14",
-		"printDeprecationWarnings" : "dkh 03/23/2023 11:42",
-		"printEnd" : "dkh 03/23/2023 11:43",
-		"printException:" : "dkh 03/23/2023 11:43",
-		"printNotPassingResults" : "dkh 03/23/2023 11:43",
-		"printNotPassingSummary" : "dkh 03/23/2023 11:44",
-		"printPassingResults" : "dkh 03/23/2023 11:44" } }
+		"print:" : "fn 9/29/2016 16:10" } }
