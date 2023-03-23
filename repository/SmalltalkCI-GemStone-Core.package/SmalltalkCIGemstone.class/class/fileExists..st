@@ -1,3 +1,3 @@
 compatibility
 fileExists: aFilename
-	^ GsFile exists: aFilename
+  ^ GsFile existsOnServer: aFilename
