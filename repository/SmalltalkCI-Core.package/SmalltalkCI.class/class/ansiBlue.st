@@ -1,5 +1,7 @@
 ansi
 ansiBlue
-	^ self isColorful
-		ifTrue: [ self escape, '[34m' ]
-		ifFalse: [ '' ]
+  ^ self isColorful
+    ifTrue: [ 
+      System waitForDebug.
+      self escape , '[34m' ]
+    ifFalse: [ '' ]
