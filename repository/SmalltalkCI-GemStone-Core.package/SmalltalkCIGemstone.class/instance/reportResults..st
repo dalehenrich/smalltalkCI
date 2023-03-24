@@ -9,8 +9,12 @@ reportResults: aTestRunner
         xmlLogDirPath: xmlLogDirPath ].
   self reportFilePath
     ifNotNil: [ :filePath | 
+      | stream |
+      stream := GsFile openWriteOnServer: filePath.
       SCIGemStoneTestReporterStdout
         report: aTestRunner
         spec: self spec
-        on: GsFile
-        openWriteOnServer: filePath ]
+        on: stream.
+      stream
+        flush;
+        close ]
