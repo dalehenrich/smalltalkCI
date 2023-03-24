@@ -10,5 +10,5 @@
 	"name" : "SCIGemStoneTestReporterFile",
 	"pools" : [
 		 ],
-	"super" : "SCITestReporter",
+	"super" : "SCITestReporterStdout",
 	"type" : "normal" }

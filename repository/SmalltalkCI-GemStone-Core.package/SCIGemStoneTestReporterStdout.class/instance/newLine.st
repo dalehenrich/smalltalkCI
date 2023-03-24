@@ -1,3 +1,3 @@
 helpers
 newLine
-	stream crlf
+  stream lf
