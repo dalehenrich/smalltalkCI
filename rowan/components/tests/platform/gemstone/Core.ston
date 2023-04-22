@@ -1,0 +1,10 @@
+RwSimpleProjectLoadComponentV2 {
+	#name : 'tests/platform/gemstone/Core',
+	#condition : 'gemstone',
+	#projectNames : [ ],
+	#componentNames : [ ],
+	#packageNames : [
+		'SmalltalkCI-Rowan-Tests'
+	],
+	#comment : ''
+}

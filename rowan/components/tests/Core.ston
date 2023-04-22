@@ -1,0 +1,13 @@
+RwSimpleProjectLoadComponentV2 {
+	#name : 'tests/Core',
+	#condition : 'tests',
+	#projectNames : [ ],
+	#componentNames : [
+		'tests/platform/Core'
+	],
+	#packageNames : [
+		'SmalltalkCI-Excluded-Tests',
+		'SmalltalkCI-Tests'
+	],
+	#comment : ''
+}

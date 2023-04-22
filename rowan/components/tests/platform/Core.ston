@@ -1,0 +1,10 @@
+RwSimpleProjectLoadComponentV2 {
+	#name : 'tests/platform/Core',
+	#condition : 'tests',
+	#projectNames : [ ],
+	#componentNames : [
+		'tests/platform/gemstone/Core'
+	],
+	#packageNames : [ ],
+	#comment : ''
+}

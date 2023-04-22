@@ -1,0 +1,12 @@
+RwSimpleProjectLoadComponentV2 {
+	#name : 'Core',
+	#condition : 'tests',
+	#projectNames : [ ],
+	#componentNames : [
+		'common/Core',
+		'platform/Core',
+		'tests/Core'
+	],
+	#packageNames : [ ],
+	#comment : ''
+}
