@@ -1,8 +1,9 @@
 RwSimpleProjectLoadComponentV2 {
 	#name : 'Core',
-	#condition : 'tests',
+	#condition : 'common',
 	#projectNames : [ ],
 	#componentNames : [
+		'bootstrap/Core',
 		'common/Core',
 		'platform/Core',
 		'tests/Core'

@@ -1,0 +1,14 @@
+{
+	"category" : "SmalltalkCI-Rowan-Bootstrap",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		 ],
+	"name" : "Smalltalk",
+	"pools" : [
+		 ],
+	"super" : "Object",
+	"type" : "normal" }

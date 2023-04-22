@@ -1,0 +1,14 @@
+{
+	"category" : "SmalltalkCI-Rowan-Bootstrap",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		 ],
+	"name" : "MetacelloIgnorePackageLoaded",
+	"pools" : [
+		 ],
+	"super" : "Object",
+	"type" : "normal" }

@@ -5,6 +5,7 @@ RwLoadSpecificationV2 {
 		'Core'
 	],
 	#customConditionalAttributes : [
+		'bootstrap',
 		'tests'
 	],
 	#platformProperties : {
