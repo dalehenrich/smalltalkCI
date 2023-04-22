@@ -1,0 +1,3 @@
+compatibility
+assureDirectoryExistence: aDirectory
+	^ aDirectory asFileReference ensureCreateDirectory

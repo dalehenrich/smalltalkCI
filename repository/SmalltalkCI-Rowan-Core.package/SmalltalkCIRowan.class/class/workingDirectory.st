@@ -1,0 +1,3 @@
+compatibility
+workingDirectory
+	^ FileLocator workingDirectory

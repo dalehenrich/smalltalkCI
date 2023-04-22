@@ -1,0 +1,3 @@
+compatibility
+imagePath
+	^ FileLocator extent1Directory asFileReference pathString

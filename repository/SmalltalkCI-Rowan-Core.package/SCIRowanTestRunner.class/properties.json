@@ -1,0 +1,14 @@
+{
+	"category" : "SmalltalkCI-Rowan-Core",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		 ],
+	"name" : "SCIRowanTestRunner",
+	"pools" : [
+		 ],
+	"super" : "SCITestRunner",
+	"type" : "normal" }

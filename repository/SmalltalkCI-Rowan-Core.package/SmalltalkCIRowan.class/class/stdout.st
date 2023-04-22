@@ -1,0 +1,3 @@
+helpers
+stdout
+	^ GsFile stdoutServer

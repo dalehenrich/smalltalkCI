@@ -1,0 +1,14 @@
+{
+	"category" : "SmalltalkCI-Rowan-Core",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		 ],
+	"name" : "SCIRowanCustomScript",
+	"pools" : [
+		 ],
+	"super" : "SCICustomScript",
+	"type" : "normal" }

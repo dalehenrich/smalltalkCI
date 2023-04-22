@@ -1,0 +1,16 @@
+{
+	"category" : "SmalltalkCI-Rowan-Core",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"produceXMLLog",
+		"xmlLogDirPath",
+		"reportFilePath" ],
+	"name" : "SmalltalkCIRowan",
+	"pools" : [
+		 ],
+	"super" : "SmalltalkCI",
+	"type" : "normal" }
