@@ -1,4 +1,0 @@
-{ 
-	#format : 'filetree',
-	#convention : 'Monticello'
-}
