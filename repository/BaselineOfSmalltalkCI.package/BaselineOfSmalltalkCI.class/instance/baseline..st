@@ -5,10 +5,18 @@ baseline: spec
 	spec
 		for: #common
 		do: [ spec
-				package: 'SmalltalkCI-Core';
+				package: 'SmalltalkCI-Core'
+					with: [ spec includes: #('SmalltalkCI-Monticello-Core') ];
 				package: 'SmalltalkCI-Excluded-Tests';
+				package: 'SmalltalkCI-Monticello-Core'
+					with: [ spec requires: #('SmalltalkCI-Core') ];
 				package: 'SmalltalkCI-Tests'
-					with: [ spec requires: #('SmalltalkCI-Core' 'SmalltalkCI-Excluded-Tests') ].
+					with: [ 
+						spec
+							includes: #('SmalltalkCI-Monticello-Tests');
+							requires: #('SmalltalkCI-Core' 'SmalltalkCI-Excluded-Tests') ];
+				package: 'SmalltalkCI-Monticello-Tests'
+					with: [ spec requires: #('SmalltalkCI-Tests') ].
 			spec
 				group: 'default' with: #('SmalltalkCI-Core');
 				group: 'Core' with: 'default'; "kept for GsDevKit compatibility"

@@ -1,0 +1,1 @@
+This class (Smalltalk) is not present in the GemStone image ... included here to minimize the impact on the smalltalkCI source code
