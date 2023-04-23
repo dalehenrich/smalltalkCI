@@ -6,7 +6,6 @@ RwLoadSpecificationV2 {
 	],
 	#customConditionalAttributes : [
 		'bootstrap',
-		'monticello',
 		'rowan',
 		'tests'
 	],

@@ -1,6 +1,6 @@
 RwSimpleProjectLoadComponentV2 {
 	#name : 'bootstrap/Core',
-	#condition : 'common',
+	#condition : 'bootstrap',
 	#projectNames : [ ],
 	#componentNames : [ ],
 	#packageNames : [

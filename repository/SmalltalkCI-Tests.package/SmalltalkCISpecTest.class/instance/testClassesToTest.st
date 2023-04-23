@@ -11,7 +11,7 @@ testClassesToTest
 	self deny: (classes includes: SmalltalkCI).
 	self assert: (classes includes: SmalltalkCITest).
 	
-	self spec loading: { SCIMetacelloLoadSpec new baseline: 'SmalltalkCI'; yourself }.
+	self spec loading: { self _loadSpecInstance3 }.
 	self spec testing: (Dictionary new
 	  add: #'allTestCases' -> false;
         add: #'exclude' -> (Dictionary new
@@ -51,4 +51,3 @@ testClassesToTest
         add: #'projects' -> #('SmalltalkCI');
         yourself).
 	self spec classesToTest allSatisfy: [ :cl | classes includes: cl]
-	
