@@ -3,7 +3,8 @@ RwSimpleProjectLoadComponentV2 {
 	#condition : 'tests',
 	#projectNames : [ ],
 	#componentNames : [
-		'tests/rowan/Core'
+		'tests/rowan/Core',
+		'tests/monticello/Core'
 	],
 	#packageNames : [
 		'SmalltalkCI-Excluded-Tests',

@@ -5,6 +5,7 @@ RwSimpleProjectLoadComponentV2 {
 	#componentNames : [
 		'bootstrap/Core',
 		'common/Core',
+		'monticello/Core',
 		'rowan/Core',
 		'tests/Core'
 	],
