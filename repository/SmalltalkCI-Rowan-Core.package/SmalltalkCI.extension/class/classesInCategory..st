@@ -1,3 +1,3 @@
 *smalltalkci-rowan-core
 classesInCategory: aCategory
-	^ Smalltalk organization categories at: aCategory
+	^ ClassOrganizer new categories at: aCategory
