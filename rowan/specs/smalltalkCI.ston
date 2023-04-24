@@ -1,5 +1,6 @@
 RwLoadSpecificationV2 {
-	#projectName : 'smalltalkCI',
+	#projectAlias : 'smalltalkCI',
+	#projectName : 'SmalltalkCI',
 	#projectSpecFile : 'rowan/project.ston',
 	#componentNames : [
 		'Core'

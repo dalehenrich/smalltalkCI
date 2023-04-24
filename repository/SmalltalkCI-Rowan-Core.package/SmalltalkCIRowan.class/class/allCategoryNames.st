@@ -1,3 +1,3 @@
 class organization
 allCategoryNames
-	^ ClassOrganizer new categories
+	^ ClassOrganizer new categories keys

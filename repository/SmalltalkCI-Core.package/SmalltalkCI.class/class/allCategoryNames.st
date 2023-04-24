@@ -1,3 +1,3 @@
 class organization
 allCategoryNames
-	^ Smalltalk organization categories collect: [ :c | c asString ]
+	^ Smalltalk organization categories keys collect: [ :c | c asString ]
