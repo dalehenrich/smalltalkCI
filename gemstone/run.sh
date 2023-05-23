@@ -312,7 +312,7 @@ gemstone::parse_options() {
   do
     case "${1:-}" in
       --gs-DEBUG)
-        GEMSTONE_DEBUG=" --debug"
+        GEMSTONE_DEBUG=" --debugGem"
 				shift
         ;;
       --gs-PRODUCTS=*)
