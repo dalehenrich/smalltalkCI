@@ -11,12 +11,10 @@ local SUPERDOIT_DOWNLOAD=https://github.com/dalehenrich/superDoit.git
 local GSDEVKIT_STONES_BRANCH=v1.1.2
 local GSDEVKIT_STONES_DOWNLOAD=git@github.com:GsDevKit/GsDevKit_stones.git
 local GSDEVKIT_STONES_DOWNLOAD=https://github.com/GsDevKit/GsDevKit_stones.git
-local STONES_REGISTRY_NAME=smalltalkCI_run
+local STONES_REGISTRY_NAME=""
 local STONE_STARTED=""
-local STONE_DIRECTORY=""
 local STONES_STONES_HOME=$SMALLTALK_CI_BUILD/stones
 local STONES_PROJECTS_HOME=$SMALLTALK_CI_BUILD/repos
-local STONES_PRODUCTS=$SMALLTALK_CI_BUILD/products
 local STONES_PROJECT_SET_NAME=devkit
 local GEMSTONE_DEBUG=""
 
@@ -53,7 +51,7 @@ gemstone::prepare_superDoit() {
 				git clone -b "${SUPERDOIT_BRANCH}" --depth 1 "${SUPERDOIT_DOWNLOAD}"
  				export PATH="`pwd`/superDoit/bin:`pwd`/superDoit/examples/utility:$PATH"
 				fold_start install_superDoit_gemstone "Downloading GemStone for superDoit..."
-					install.sh $GS_ALTERNATE_PRODUCTS
+					install.sh
 				fold_end install_superDoit_gemstone
 			fold_end clone_superDoit
 		fi
@@ -90,14 +88,26 @@ gemstone::prepare_gsdevkit_stones() {
 			fi
 			export PATH="`pwd`/GsDevKit_stones/bin:$PATH"
 		popd
-		export STONES_DATA_HOME="$SMALLTALK_CI_BUILD/.stones_data_home"
-		if [ ! -d "$STONES_DATA_HOME" ] ; then
+		if [ "$STONES_REGISTRY_NAME"x = "x" ]; then
+			# set up with default registry and default registry name
+			export STONES_DATA_HOME="$SMALLTALK_CI_BUILD/.stones_data_home"
+			local STONES_REGISTRY_NAME=smalltalkCI_run
 			createRegistry.solo $STONES_REGISTRY_NAME $GEMSTONE_DEBUG
 			createProjectSet.solo --registry=$STONES_REGISTRY_NAME --projectSet=$STONES_PROJECT_SET_NAME \
-				                 --from=$STONES_PROJECTS_HOME/GsDevKit_stones/bin/gsdevkitProjectSpecs.ston \
-												 --key=server --https $GEMSTONE_DEBUG
+				                 --from=$STONES_PROJECTS_HOME/GsDevKit_stones/projectSets/ssh/devKit.ston $GEMSTONE_DEBUG
 			cloneProjectsFromProjectSet.solo  --registry=$STONES_REGISTRY_NAME --projectSet=$STONES_PROJECT_SET_NAME \
 				                 --projectDirectory=$STONES_PROJECTS_HOME $GEMSTONE_DEBUG
+			registerProductDirectory.solo --registry=$STONES_REGISTRY_NAME --productDirectory=$SMALLTALK_CI_BUILD/products $GEMSTONE_DEBUG
+			registerStonesDirectory.solo --registry=$STONES_REGISTRY_NAME --stonesDirectory=$STONES_HOME/$STONES_REGISTRY_NAME/stones
+		else
+			if [ "$STONES_DATA_HOME"x = "x" ]; then
+				echo "STONES_DATA_HOME must be defined when using --gs-REGISTRY option"
+				exit 1
+			fi
+			if [ "$STONES_HOME"x = "x" ]; then
+				echo "STONES_HOME must be defined when using --gs-REGISTRY option"
+				exit 1
+			fi
 		fi
 		registryReport.solo
 	fold_end clone_gsdevkit_stones
@@ -112,13 +122,7 @@ gemstone::prepare_stone() {
   gemstone_version="$(echo $1 | cut -f2 -d-)"
 
   fold_start create_stone "Creating stone..."
-		registerProductDirectory.solo --registry=$STONES_REGISTRY_NAME --productDirectory=$STONES_PRODUCTS $GEMSTONE_DEBUG
-		if [ "$GS_ALTERNATE_PRODUCTS"x != "x" ] ; then
-			# matches superDoit gemstone version, so reuse the download
-			registerProduct.solo --registry=$STONES_REGISTRY_NAME --fromDirectory=$GS_ALTERNATE_PRODUCTS ${gemstone_version} $GEMSTONE_DEBUG
-		else
-			downloadGemStone.solo --directory=$STONES_PRODUCTS --registry=$STONES_REGISTRY_NAME ${gemstone_version} $GEMSTONE_DEBUG
-		fi
+		downloadGemStone.solo --registry=$STONES_REGISTRY_NAME ${gemstone_version} $GEMSTONE_DEBUG
 		if [ "$STONE_DIRECTORY"x = "x" ] ; then
 			createStone.solo --force --registry=$STONES_REGISTRY_NAME --template=minimal_seaside \
 				--start --root=$STONES_STONES_HOME/$STONE_NAME "${gemstone_version}" $GEMSTONE_DEBUG
@@ -273,9 +277,6 @@ run_build() {
       ;;
   esac
 
-	if [ ! -d "$STONES_PRODUCTS" ] ; then
-		mkdir $STONES_PRODUCTS
-	fi
 	if [ ! -d "$STONES_PROJECTS_HOME" ] ; then
 		mkdir $STONES_PROJECTS_HOME
 	fi
@@ -306,8 +307,6 @@ gemstone::parse_options() {
       ;;
   esac
 
-	GS_ALTERNATE_PRODUCTS=""
-
   while :
   do
     case "${1:-}" in
@@ -315,16 +314,12 @@ gemstone::parse_options() {
         GEMSTONE_DEBUG=" --debug"
 				shift
         ;;
-      --gs-PRODUCTS=*)
-        GS_ALTERNATE_PRODUCTS="${1#*=}"
+      --gs-REGISTRY=*)
+        STONES_REGISTRY_NAME="${1#*=}"
 				shift
         ;;
       --gs-REPOS=*)
         STONES_PROJECTS_HOME="${1#*=}"
-				shift
-        ;;
-      --gs-STONE_DIR=*)
-        STONE_DIRECTORY="${1#*=}"
 				shift
         ;;
       --gs-*)
@@ -339,6 +334,5 @@ gemstone::parse_options() {
     esac
   done
 
-	export GS_ALTERNATE_PRODUCTS
 }
 

@@ -81,21 +81,16 @@ print_help() {
     --gs-DEBUG          Enable remote debugging of GsDevKit_stones .solo scripts
                         via topaz DEBUGGEM command.
 
-    --gs-PRODUCTS=<gemstone-product-directory>
-                        Specify directory containing GemStone product downloads
-                        to be used instead of downloading products from 
-                        https://ftp.gemtalksystems.com for each run.
+    --gs-REGISTRY=<registry-name>
+                        If not specified, a private registry will be created and 
+                        populated. If specified, \$STONES_DATA_HOME and \$STONES_HOME
+                        are expected to be defined. If the registry already exists,
+                        then it will be reused. Otherwise it will be created and 
+                        populated in \$STONES_HOME.
 
     --gs-REPOS=<gemstone-server-git-projects>
                         Specify directory containing existing server projects to be 
                         used instead of cloning projects from GitHub for each run.
-
-    --gs-STONE_DIR=<gemstone-stone-directory>
-                        Specify directory of an existing stone. A symbolic link named
-                        product is expected to exist in the <gemstone-stone-directory>
-                        and point to the GEMSTONE product tree for the stone. The name
-                        stone is expected to be managed independently of the run.sh
-                        script. 
 
   EXAMPLE:
     $(basename -- $0) -s "Squeak64-trunk" --headfull /path/to/project/.smalltalk.ston
