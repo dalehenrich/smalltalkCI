@@ -5,10 +5,10 @@
 
 # set -x
 local STONE_NAME="smalltalkci"
-local SUPERDOIT_BRANCH=v3.1
+local SUPERDOIT_BRANCH=v4.1
 local SUPERDOIT_DOWNLOAD=git@github.com:dalehenrich/superDoit.git
 local SUPERDOIT_DOWNLOAD=https://github.com/dalehenrich/superDoit.git
-local GSDEVKIT_STONES_BRANCH=v1.1
+local GSDEVKIT_STONES_BRANCH=v1.1.2
 local GSDEVKIT_STONES_DOWNLOAD=git@github.com:GsDevKit/GsDevKit_stones.git
 local GSDEVKIT_STONES_DOWNLOAD=https://github.com/GsDevKit/GsDevKit_stones.git
 local STONES_REGISTRY_NAME=smalltalkCI_run
