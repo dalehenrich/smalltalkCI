@@ -3,7 +3,7 @@
 # of a smalltalkCI build and it is not meant to be executed by itself.
 ################################################################################
 
-# set -x
+set -x
 local STONE_NAME="smalltalkci"
 local SUPERDOIT_BRANCH=v4.1
 local SUPERDOIT_DOWNLOAD=git@github.com:dalehenrich/superDoit.git
@@ -12,9 +12,10 @@ local GSDEVKIT_STONES_BRANCH=v1.1.2
 local GSDEVKIT_STONES_DOWNLOAD=git@github.com:GsDevKit/GsDevKit_stones.git
 local GSDEVKIT_STONES_DOWNLOAD=https://github.com/GsDevKit/GsDevKit_stones.git
 local STONES_REGISTRY_NAME=""
+local STONES_DIRECTORY=""
+local STONE_DIRECTORY=""
 local STONE_STARTED=""
-local STONES_STONES_HOME=$SMALLTALK_CI_BUILD/stones
-local STONES_PROJECTS_HOME=$SMALLTALK_CI_BUILD/repos
+local STONES_PROJECTS_HOME=""
 local STONES_PROJECT_SET_NAME=devkit
 local GEMSTONE_DEBUG=""
 local STONES_SUPERDOIT_ROOT=""
@@ -45,23 +46,29 @@ echo "GEMSTONE_PRODUCT_NAME=$GEMSTONE_PRODUCT_NAME"
 # Clone the superDoit project, install GemStone
 ################################################################################
 gemstone::prepare_superDoit() {
-	pushd $STONES_PROJECTS_HOME
-		if [ -d "$STONES_PROJECTS_HOME/superDoit" ] ; then
-			echo "Reusing existing superDoit project directory: $STONES_PROJECTS_HOME/superDoit"
-		else
-			fold_start clone_superDoit "Cloning superDoit..."
-				git clone -b "${SUPERDOIT_BRANCH}" --depth 1 "${SUPERDOIT_DOWNLOAD}"
- 				export PATH="`pwd`/superDoit/bin:`pwd`/superDoit/examples/utility:$PATH"
-				fold_start install_superDoit_gemstone "Downloading GemStone for superDoit..."
-					install.sh
-				fold_end install_superDoit_gemstone
-			fold_end clone_superDoit
-		fi
-		export PATH="`pwd`/superDoit/bin:`pwd`/superDoit/examples/utility:$PATH"
-		fold_start versionreport_superDoit "superDoit versionReport.solo..."
-			versionReport.solo
-		fold_end versionreport_superDoit
-	popd
+	if [ -d "$STONES_SUPERDOIT_ROOT" ]; then
+		pushd $STONES_SUPERDOIT_ROOT
+			export PATH="`pwd`/superDoit/bin:`pwd`/superDoit/examples/utility:$PATH"
+		popd
+	else
+		pushd $STONES_PROJECTS_HOME
+			if [ -d "$STONES_PROJECTS_HOME/superDoit" ] ; then
+				echo "Reusing existing superDoit project directory: $STONES_PROJECTS_HOME/superDoit"
+			else
+				fold_start clone_superDoit "Cloning superDoit..."
+					git clone -b "${SUPERDOIT_BRANCH}" --depth 1 "${SUPERDOIT_DOWNLOAD}"
+	 				export PATH="`pwd`/superDoit/bin:`pwd`/superDoit/examples/utility:$PATH"
+					fold_start install_superDoit_gemstone "Downloading GemStone for superDoit..."
+						install.sh
+					fold_end install_superDoit_gemstone
+				fold_end clone_superDoit
+			fi
+			export PATH="`pwd`/superDoit/bin:`pwd`/superDoit/examples/utility:$PATH"
+		popd
+	fi
+	fold_start versionreport_superDoit "superDoit versionReport.solo..."
+		versionReport.solo
+	fold_end versionreport_superDoit
 }
 
 ################################################################################
@@ -99,8 +106,11 @@ gemstone::prepare_gsdevkit_stones() {
 				                 --from=$STONES_PROJECTS_HOME/GsDevKit_stones/projectSets/ssh/devKit.ston $GEMSTONE_DEBUG
 			cloneProjectsFromProjectSet.solo  --registry=$STONES_REGISTRY_NAME --projectSet=$STONES_PROJECT_SET_NAME \
 				                 --projectDirectory=$STONES_PROJECTS_HOME $GEMSTONE_DEBUG
-			registerProductDirectory.solo --registry=$STONES_REGISTRY_NAME --productDirectory=$SMALLTALK_CI_BUILD/products $GEMSTONE_DEBUG
-			registerStonesDirectory.solo --registry=$STONES_REGISTRY_NAME --stonesDirectory=$STONES_HOME/$STONES_REGISTRY_NAME/stones
+			registerProductDirectory.solo --registry=$STONES_REGISTRY_NAME \
+			  --productDirectory=$STONES_HOME/$STONES_REGISTRY_NAME/products $GEMSTONE_DEBUG
+			STONES_DIRECTORY=$STONES_HOME/$STONES_REGISTRY_NAME/stones
+			registerStonesDirectory.solo --registry=$STONES_REGISTRY_NAME \
+			  --stonesDirectory=$STONES_DIRECTORY $GEMSTONE_DEBUG
 		else
 			if [ "$STONES_DATA_HOME"x = "x" ]; then
 				echo "STONES_DATA_HOME must be defined when using --gs-REGISTRY option"
@@ -110,6 +120,7 @@ gemstone::prepare_gsdevkit_stones() {
 				echo "STONES_HOME must be defined when using --gs-REGISTRY option"
 				exit 1
 			fi
+			STONES_DIRECTORY=`registryQuery.solo -r $STONES_REGISTRY_NAME --stonesDirectory`
 		fi
 		registryReport.solo
 	fold_end clone_gsdevkit_stones
@@ -120,30 +131,20 @@ gemstone::prepare_gsdevkit_stones() {
 ################################################################################
 gemstone::prepare_stone() {
   local gemstone_version
+	local productPath
 
   gemstone_version="$(echo $1 | cut -f2 -d-)"
 
   fold_start create_stone "Creating stone..."
-		downloadGemStone.solo --registry=$STONES_REGISTRY_NAME ${gemstone_version} $GEMSTONE_DEBUG
-		if [ "$STONE_DIRECTORY"x = "x" ] ; then
-			createStone.solo --force --registry=$STONES_REGISTRY_NAME --template=minimal_seaside \
-				--start --root=$STONES_STONES_HOME/$STONE_NAME "${gemstone_version}" $GEMSTONE_DEBUG
-			STONE_DIRECTORY=$STONES_STONES_HOME/$STONE_NAME
-			STONE_STARTED="TRUE"
-		else
-			STONE_STARTED="FALSE"
-			if [ ! -d "$STONE_DIRECTORY" ] ; then
-				print_error_and_exit "The directory named by --gs-STONE_DIR option ($STONE_DIRECTORY) is expected to exist"
-			fi
+		productPath=`registryQuery.solo -r $STONES_REGISTRY_NAME --product=${gemstone_version}`
+		if [ "$productPath"x = "x" ]; then
+			downloadGemStone.solo --registry=$STONES_REGISTRY_NAME ${gemstone_version} $GEMSTONE_DEBUG
 		fi
+		STONE_DIRECTORY=${STONES_DIRECTORY}/$STONE_NAME
+		createStone.solo --force --registry=$STONES_REGISTRY_NAME --template=minimal_seaside \
+				--start $STONE_NAME ${gemstone_version} $GEMSTONE_DEBUG
+		STONE_STARTED="TRUE"
 		pushd $STONE_DIRECTORY
-			if [ "${GEMSTONE+set}" ] ; then
-				echo "GEMSTONE = $GEMSTONE (PREDEFINED)"
-			else
-				export GEMSTONE="`pwd`/product"
-				echo "GEMSTONE = $GEMSTONE (DEFAULT VALUE)"
-			fi
-			export PATH=$GEMSTONE/bin:$PATH
 			loadTode.stone --projectDirectory=$STONES_PROJECTS_HOME $GEMSTONE_DEBUG
 		popd
   fold_end create_stone
@@ -162,10 +163,11 @@ gemstone::load_project() {
 
   fold_start load_server_project "Loading server project..."
  	pushd $STONE_DIRECTORY
-		if [ "$GEMSTONE"x = "x" ] ; then
-			export GEMSTONE="`pwd`/product"
-		fi
-		export PATH=$GEMSTONE/bin:$PATH
+# shouldn't have to set GEMSTONE
+#		if [ "$GEMSTONE"x = "x" ] ; then
+#			export GEMSTONE="`pwd`/product"
+#		fi
+#		export PATH=$GEMSTONE/bin:$PATH
 		loadSmalltalkCIProject.stone --projectRoot=$SMALLTALK_CI_HOME --config_ston=${config_ston} $GEMSTONE_DEBUG
 		status=$?
 	popd
@@ -282,11 +284,6 @@ run_build() {
 	if [ ! -d "$STONES_PROJECTS_HOME" ] ; then
 		mkdir $STONES_PROJECTS_HOME
 	fi
-	if [ "$STONE_DIRECTORY"x = "x" ] ; then
-		if [ ! -d "$STONES_STONES_HOME" ] ; then
-			mkdir $STONES_STONES_HOME
-		fi
-	fi
 
 	gemstone::darwin_shared_mem_setup
 	gemstone::prepare_gemstone
@@ -300,7 +297,7 @@ run_build() {
 # Handle GemStone-specific options.
 ################################################################################
 gemstone::parse_options() {
-
+set -x
   case "$(uname -s)" in
     "Linux"|"Darwin")
       ;;
