@@ -3,7 +3,7 @@
 # of a smalltalkCI build and it is not meant to be executed by itself.
 ################################################################################
 
-set -x
+# set -x
 local STONE_NAME="smalltalkci"
 local SUPERDOIT_BRANCH=v4.1
 local SUPERDOIT_DOWNLOAD=git@github.com:dalehenrich/superDoit.git
@@ -199,7 +199,7 @@ gemstone::test_project() {
 
 	if [ "$STONE_STARTED" = "TRUE" ] ; then
     fold_start stop_stone "Stopping stone..."
-      stopstone "${STONE_NAME}" DataCurator swordfish 
+      stopStone.solo -r $STONES_REGISTRY_NAME "${STONE_NAME}" 
     fold_end stop_stone
 	fi
 
@@ -293,7 +293,6 @@ run_build() {
 # Handle GemStone-specific options.
 ################################################################################
 gemstone::parse_options() {
-set -x
   case "$(uname -s)" in
     "Linux"|"Darwin")
       ;;
