@@ -100,7 +100,6 @@ gemstone::prepare_gsdevkit_stones() {
 		if [ "$STONES_REGISTRY_NAME"x = "x" ]; then
 			# set up with default registry and default registry name
 			export STONES_DATA_HOME="$SMALLTALK_CI_BUILD/.stones_data_home"
-			STONES_PROJECTS_HOME="$SMALLTALK_CI_BUILD/repos"
 			local STONES_REGISTRY_NAME=smalltalkCI_run
 			createRegistry.solo $STONES_REGISTRY_NAME --ensure $GEMSTONE_DEBUG
 			createProjectSet.solo --registry=$STONES_REGISTRY_NAME --projectSet=$STONES_PROJECT_SET_NAME \
@@ -281,7 +280,7 @@ run_build() {
 	if [ ! -d "$STONES_PROJECTS_HOME" ] ; then
 		mkdir $STONES_PROJECTS_HOME
 	fi
-
+	
 	gemstone::darwin_shared_mem_setup
 	gemstone::prepare_gemstone
 	gemstone::prepare_superDoit
@@ -336,6 +335,10 @@ gemstone::parse_options() {
         ;;
     esac
   done
+
+	if [ "$STONES_PROJECTS_HOME"x = "x" ]; then
+		STONES_PROJECTS_HOME="$SMALLTALK_CI_BUILD/repos"
+	fi
 	if [ "$STONES_SUPERDOIT_ROOT"x = "x" ] ; then
 		STONES_SUPERDOIT_ROOT=$STONES_PROJECTS_HOME/superDoit
 	fi
