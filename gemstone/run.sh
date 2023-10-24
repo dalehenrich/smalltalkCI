@@ -95,7 +95,7 @@ gemstone::prepare_gsdevkit_stones() {
 	echo "1"
 		pushd "$STONES_PROJECTS_HOME"
 	echo "2"
-			if [1 ! -d "$STONES_PROJECTS_HOME/GsDevKit_stones" ] ; then
+			if [ ! -d "$STONES_PROJECTS_HOME/GsDevKit_stones" ] ; then
 	echo "3"
 				git clone -b "${GSDEVKIT_STONES_BRANCH}" --depth 1 "${GSDEVKIT_STONES_DOWNLOAD}"
 				STONES_GSDEVKITSTONES_ROOT=$STONES_PROJECTS_HOME/GsDevKit_stones
