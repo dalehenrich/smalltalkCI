@@ -152,6 +152,10 @@ set -x
 		createStone.solo --force --registry=$STONES_REGISTRY_NAME --template=minimal_seaside \
 				--start $STONE_NAME ${gemstone_version} $GEMSTONE_DEBUG
 		STONE_STARTED="TRUE"
+		echo "looking at $STONES_PROJECTS_HOME"
+		ls -altr $STONES_PROJECTS_HOME
+		echo "looking at $STONES_DIRECTORY"
+		ls -altr $STONES_DIRECTORY
 		pushd $STONE_DIRECTORY
 			loadTode.stone --projectDirectory=$STONES_PROJECTS_HOME $GEMSTONE_DEBUG
 		popd
