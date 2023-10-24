@@ -91,7 +91,6 @@ echo "[Info] Creating /opt/gemstone directory"
 ################################################################################
 gemstone::prepare_gsdevkit_stones() {
 	fold_start clone_gsdevkit_stones "Cloning GsDevKit_stones..."
-	set -x
 		pushd "$STONES_PROJECTS_HOME"
 			if [ ! -d "$STONES_PROJECTS_HOME/GsDevKit_stones" ] ; then
 				git clone -b "${GSDEVKIT_STONES_BRANCH}" --depth 1 "${GSDEVKIT_STONES_DOWNLOAD}"
@@ -107,7 +106,7 @@ gemstone::prepare_gsdevkit_stones() {
 			if [ "$CI" = "true" ] ; then
 				urlType=https
 			fi
-			local STONES_REGISTRY_NAME=smalltalkCI_run
+			STONES_REGISTRY_NAME=smalltalkCI_run
 			STONES_HOME=$SMALLTALK_CI_BUILD
 			createRegistry.solo $STONES_REGISTRY_NAME --ensure $GEMSTONE_DEBUG
 			createProjectSet.solo --registry=$STONES_REGISTRY_NAME --projectSet=$STONES_PROJECT_SET_NAME \
@@ -130,7 +129,6 @@ gemstone::prepare_gsdevkit_stones() {
 			fi
 			STONES_DIRECTORY=`registryQuery.solo -r $STONES_REGISTRY_NAME --stonesDirectory`
 		fi
-	set +x
 		registryReport.solo
 	fold_end clone_gsdevkit_stones
 }
@@ -145,6 +143,7 @@ gemstone::prepare_stone() {
   gemstone_version="$(echo $1 | cut -f2 -d-)"
 
   fold_start create_stone "Creating stone..."
+set -x
 		productPath=`registryQuery.solo -r $STONES_REGISTRY_NAME --product=${gemstone_version}`
 		if [ "$productPath"x = "x" ]; then
 			downloadGemStone.solo --registry=$STONES_REGISTRY_NAME ${gemstone_version} $GEMSTONE_DEBUG
@@ -156,6 +155,7 @@ gemstone::prepare_stone() {
 		pushd $STONE_DIRECTORY
 			loadTode.stone --projectDirectory=$STONES_PROJECTS_HOME $GEMSTONE_DEBUG
 		popd
+set +x
   fold_end create_stone
 }
 
