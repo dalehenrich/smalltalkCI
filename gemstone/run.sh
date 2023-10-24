@@ -100,6 +100,7 @@ gemstone::prepare_gsdevkit_stones() {
 		if [ "$STONES_REGISTRY_NAME"x = "x" ]; then
 			# set up with default registry and default registry name
 			export STONES_DATA_HOME="$SMALLTALK_CI_BUILD/.stones_data_home"
+			STONES_PROJECTS_HOME="$SMALLTALK_CI_BUILD/repos"
 			local STONES_REGISTRY_NAME=smalltalkCI_run
 			createRegistry.solo $STONES_REGISTRY_NAME --ensure $GEMSTONE_DEBUG
 			createProjectSet.solo --registry=$STONES_REGISTRY_NAME --projectSet=$STONES_PROJECT_SET_NAME \
