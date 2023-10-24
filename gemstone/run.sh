@@ -105,7 +105,7 @@ gemstone::prepare_gsdevkit_stones() {
 			local STONES_REGISTRY_NAME=smalltalkCI_run
 			createRegistry.solo $STONES_REGISTRY_NAME --ensure $GEMSTONE_DEBUG
 			createProjectSet.solo --registry=$STONES_REGISTRY_NAME --projectSet=$STONES_PROJECT_SET_NAME \
-				                 --from=$STONES_GSDEVKITSTONES_ROOT/projectSets/http/devKit.ston $GEMSTONE_DEBUG
+				                 --from=$STONES_GSDEVKITSTONES_ROOT/projectSets/http/devkit.ston $GEMSTONE_DEBUG
 			cloneProjectsFromProjectSet.solo  --registry=$STONES_REGISTRY_NAME --projectSet=$STONES_PROJECT_SET_NAME \
 				                 --projectDirectory=$STONES_PROJECTS_HOME $GEMSTONE_DEBUG
 			registerProductDirectory.solo --registry=$STONES_REGISTRY_NAME \
