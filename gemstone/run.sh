@@ -108,6 +108,7 @@ gemstone::prepare_gsdevkit_stones() {
 				urlType=https
 			fi
 			local STONES_REGISTRY_NAME=smalltalkCI_run
+			STONES_HOME=$SMALLTALK_CI_BUILD
 			createRegistry.solo $STONES_REGISTRY_NAME --ensure $GEMSTONE_DEBUG
 			createProjectSet.solo --registry=$STONES_REGISTRY_NAME --projectSet=$STONES_PROJECT_SET_NAME \
 				                 --from=$STONES_GSDEVKITSTONES_ROOT/projectSets/$urlType/devkit.ston $GEMSTONE_DEBUG
