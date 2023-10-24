@@ -193,10 +193,6 @@ gemstone::test_project() {
 
   fold_start run_tests "Running project tests..."
  	pushd $STONE_DIRECTORY
-		if [ "$GEMSTONE"x = "x" ] ; then
-			export GEMSTONE="`pwd`/product"
-		fi
-		export PATH=$GEMSTONE/bin:$PATH
 		testSmalltalkCIProject.stone  --buildDirectory=$SMALLTALK_CI_BUILD --config_ston=${config_ston} --named='${config_smalltalk} Server (${STONE_NAME})' $GEMSTONE_DEBUG
 		status=$?
 	popd
