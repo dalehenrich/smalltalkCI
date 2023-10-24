@@ -92,27 +92,25 @@ echo "[Info] Creating /opt/gemstone directory"
 gemstone::prepare_gsdevkit_stones() {
 	fold_start clone_gsdevkit_stones "Cloning GsDevKit_stones..."
 	set -x
-	echo "1"
 		pushd "$STONES_PROJECTS_HOME"
-	echo "2"
 			if [ ! -d "$STONES_PROJECTS_HOME/GsDevKit_stones" ] ; then
-	echo "3"
 				git clone -b "${GSDEVKIT_STONES_BRANCH}" --depth 1 "${GSDEVKIT_STONES_DOWNLOAD}"
 				STONES_GSDEVKITSTONES_ROOT=$STONES_PROJECTS_HOME/GsDevKit_stones
 				echo STONES_GSDEVKITSTONES_ROOT=$STONES_GSDEVKITSTONES_ROOT
 			fi
-	echo "4"
 			export PATH="`pwd`/GsDevKit_stones/bin:$PATH"
 		popd
-	echo "5"
-	set +x
 		if [ "$STONES_REGISTRY_NAME"x = "x" ]; then
 			# set up with default registry and default registry name
 			export STONES_DATA_HOME="$SMALLTALK_CI_BUILD/.stones_data_home"
+			local urlType=ssh
+			if [ "$CI" = "true" ] ; then
+				urlType=https
+			fi
 			local STONES_REGISTRY_NAME=smalltalkCI_run
 			createRegistry.solo $STONES_REGISTRY_NAME --ensure $GEMSTONE_DEBUG
 			createProjectSet.solo --registry=$STONES_REGISTRY_NAME --projectSet=$STONES_PROJECT_SET_NAME \
-				                 --from=$STONES_GSDEVKITSTONES_ROOT/projectSets/http/devkit.ston $GEMSTONE_DEBUG
+				                 --from=$STONES_GSDEVKITSTONES_ROOT/projectSets/$urlType/devkit.ston $GEMSTONE_DEBUG
 			cloneProjectsFromProjectSet.solo  --registry=$STONES_REGISTRY_NAME --projectSet=$STONES_PROJECT_SET_NAME \
 				                 --projectDirectory=$STONES_PROJECTS_HOME $GEMSTONE_DEBUG
 			registerProductDirectory.solo --registry=$STONES_REGISTRY_NAME \
@@ -131,6 +129,7 @@ gemstone::prepare_gsdevkit_stones() {
 			fi
 			STONES_DIRECTORY=`registryQuery.solo -r $STONES_REGISTRY_NAME --stonesDirectory`
 		fi
+	set +x
 		registryReport.solo
 	fold_end clone_gsdevkit_stones
 }

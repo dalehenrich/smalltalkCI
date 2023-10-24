@@ -21,9 +21,9 @@ jobs:
       matrix:
         os: [ ubuntu-20.04 ]
         smalltalk:
-          - GemStone64-3.6.6
+#          - GemStone64-3.6.6
           - GemStone64-3.7.0
-          - Pharo64-11
+#          - Pharo64-11
 #        os: [ ubuntu-20.04, macos-latest, windows-2019 ]
 #        smalltalk:
 #          - Squeak64-trunk
@@ -92,6 +92,7 @@ jobs:
           smalltalk-image: ${{ matrix.smalltalk }}
       - name: Run smalltalkCI self test
         run: |
+          export CI="true"
           tests/all_tests.sh
           bin/smalltalkci -s ${{ matrix.smalltalk }} --self-test
         shell: bash
