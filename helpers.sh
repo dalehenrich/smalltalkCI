@@ -92,6 +92,18 @@ print_help() {
                         Specify directory containing existing server projects to be 
                         used instead of cloning projects from GitHub for each run.
 
+    --gs-GSDEVKITSTONES
+                       Specify root directory of the GsDevKit_stones project to be used.
+                       Project will be cloned from GitHub for each run. If --gs-REPOS
+                       is specified, the project will be expected to be present in that
+                       directory. 
+
+		--gs-SUPERDOIT
+                       Specify root directory of the superDoit project to be used.
+                       Project will be cloned from GitHub for each run. If --gs-REPOS
+                       is specified, the project will be expected to be present in that
+                       directory.
+
   EXAMPLE:
     $(basename -- $0) -s "Squeak64-trunk" --headfull /path/to/project/.smalltalk.ston
 

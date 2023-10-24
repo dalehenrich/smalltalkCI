@@ -17,6 +17,8 @@ local STONES_STONES_HOME=$SMALLTALK_CI_BUILD/stones
 local STONES_PROJECTS_HOME=$SMALLTALK_CI_BUILD/repos
 local STONES_PROJECT_SET_NAME=devkit
 local GEMSTONE_DEBUG=""
+local STONES_SUPERDOIT_ROOT=""
+local STONES_GSDEVKITSTONES_ROOT=""
 
 vers=`echo "${config_smalltalk}" | sed 's/GemStone64-//'`
 
@@ -322,6 +324,14 @@ gemstone::parse_options() {
         STONES_PROJECTS_HOME="${1#*=}"
 				shift
         ;;
+      --gs-SUPERDOIT=*)
+        STONES_SUPERDOIT_ROOT="${1#*=}"
+				shift
+        ;;
+      --gs-GSDEVKITSTONES=*)
+        STONES_GSDEVKITSTONES_ROOT="${1#*=}"
+				shift
+        ;;
       --gs-*)
         print_error_and_exit "Unknown GemStone-specific option: $1"
         ;;
@@ -333,6 +343,11 @@ gemstone::parse_options() {
         ;;
     esac
   done
-
+	if [ "$STONES_SUPERDOIT_ROOT"x = "x" ] ; then
+		STONES_SUPERDOIT_ROOT=$STONES_PROJECTS_HOME/superDoit
+	fi
+	if [ "$STONES_GSDEVKITSTONES_ROOT"x = "x" ] ; then
+		STONES_GSDEVKITSTONES_ROOT=$STONES_PROJECTS_HOME/GsDevKit_stones
+	fi
 }
 
