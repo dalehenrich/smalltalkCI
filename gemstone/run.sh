@@ -154,7 +154,7 @@ set +x
 		STONE_DIRECTORY=${STONES_DIRECTORY}/$STONE_NAME
 		loadTode="true"
 		if [ -d "$STONE_DIRECTORY" ] ; then
-			newExtent.solo -r $STONES_REGISTRY_NAME -e snapshots/extent0.tode.dbf $STONE_NAME $GEMSTONE_DEBUG
+			newExtent.solo -r $STONES_REGISTRY_NAME -e $STONE_DIRECTORY/snapshots/extent0.tode.dbf $STONE_NAME $GEMSTONE_DEBUG
 			loadTode="false"
 		else
 			createStone.solo --registry=$STONES_REGISTRY_NAME --template=default_stone \
