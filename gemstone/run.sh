@@ -143,23 +143,30 @@ gemstone::prepare_stone() {
   gemstone_version="$(echo $1 | cut -f2 -d-)"
 
   fold_start create_stone "Creating stone..."
-set -x
 		productPath=`registryQuery.solo -r $STONES_REGISTRY_NAME --product=${gemstone_version}`
 		if [ "$productPath"x = "x" ]; then
 			downloadGemStone.solo --registry=$STONES_REGISTRY_NAME ${gemstone_version} $GEMSTONE_DEBUG
 		fi
 		STONE_DIRECTORY=${STONES_DIRECTORY}/$STONE_NAME
-		createStone.solo --force --registry=$STONES_REGISTRY_NAME --template=minimal_seaside \
+		loadTode="true"
+		if [ -d "$STONE_DIRECTORY" ] ; then
+			newExtent.solo -r $STONES_REGISTRY_NAME -e snapshots/extent0.tode.dbf $STONE_NAME $GEMSTONE_DEBUG
+			loadTode="false"
+		else
+			createStone.solo --registry=$STONES_REGISTRY_NAME --template=default_stone \
 				--start $STONE_NAME ${gemstone_version} $GEMSTONE_DEBUG
+		fi
 		STONE_STARTED="TRUE"
 		echo "looking at $STONES_PROJECTS_HOME"
 		ls -altr $STONES_PROJECTS_HOME
 		echo "looking at $STONES_DIRECTORY"
 		ls -altr $STONES_DIRECTORY
-		pushd $STONE_DIRECTORY
-			loadTode.stone --projectDirectory=$STONES_PROJECTS_HOME $GEMSTONE_DEBUG
-		popd
-set +x
+		if [ "$loadTode" = "true" ] ; then
+			pushd $STONE_DIRECTORY
+				loadTode.stone --projectDirectory=$STONES_PROJECTS_HOME $GEMSTONE_DEBUG
+				snapshot.stone --extension=.tode.dbf snapshots $GEMSTONE_DEBUG
+			popd
+		fi
   fold_end create_stone
 }
 
