@@ -218,8 +218,8 @@ gemstone::test_project() {
 	popd
 
 	if [ "$STONE_STARTED" = "TRUE" ] ; then
-    fold_start stop_stone "Stopping stone..."
-      stopStone.solo -r $STONES_REGISTRY_NAME "${STONE_NAME}" 
+    fold_start stop_stone "Stopping stone and netldi..."
+      stopStone.solo -r $STONES_REGISTRY_NAME "${STONE_NAME}" -b  $GEMSTONE_DEBUG
     fold_end stop_stone
 	fi
 
