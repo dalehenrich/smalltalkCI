@@ -118,7 +118,6 @@ gemstone::prepare_gsdevkit_stones() {
 			STONES_DIRECTORY=$STONES_HOME/$STONES_REGISTRY_NAME/stones
 			registerStonesDirectory.solo --registry=$STONES_REGISTRY_NAME \
 			  --stonesDirectory=$STONES_DIRECTORY $GEMSTONE_DEBUG
-			echo "[1] STONES_DIRECTORY=$STONES_DIRECTORY"
 		else
 			if [ "$STONES_DATA_HOME"x = "x" ]; then
 				echo "STONES_DATA_HOME must be defined when using --gs-REGISTRY option"
@@ -129,7 +128,6 @@ gemstone::prepare_gsdevkit_stones() {
 				exit 1
 			fi
 			STONES_DIRECTORY=`registryQuery.solo -r $STONES_REGISTRY_NAME --stonesDirectory`
-			echo "[2] STONES_DIRECTORY=$STONES_DIRECTORY"
 		fi
 		registryReport.solo
 	fold_end clone_gsdevkit_stones
@@ -145,8 +143,6 @@ gemstone::prepare_stone() {
   gemstone_version="$(echo $1 | cut -f2 -d-)"
 
   fold_start create_stone "Creating stone..."
-		echo "[3] STONES_DIRECTORY=$STONES_DIRECTORY"
-set +x
 		productPath=`registryQuery.solo -r $STONES_REGISTRY_NAME --product=${gemstone_version}`
 		if [ "$productPath"x = "x" ]; then
 			downloadGemStone.solo --registry=$STONES_REGISTRY_NAME ${gemstone_version} $GEMSTONE_DEBUG
@@ -160,7 +156,6 @@ set +x
 			createStone.solo --registry=$STONES_REGISTRY_NAME --template=default_stone \
 				--start $STONE_NAME ${gemstone_version} $GEMSTONE_DEBUG
 		fi
-set +x
 		STONE_STARTED="TRUE"
 		echo "looking at $STONES_PROJECTS_HOME"
 		ls -altr $STONES_PROJECTS_HOME
