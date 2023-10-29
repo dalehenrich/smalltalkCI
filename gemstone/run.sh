@@ -164,7 +164,7 @@ gemstone::prepare_stone() {
 		if [ "$loadTode" = "true" ] ; then
 			pushd $STONE_DIRECTORY
 				loadTode.stone --projectDirectory=$STONES_PROJECTS_HOME $GEMSTONE_DEBUG
-				snapshot.stone --extension=.tode.dbf snapshots $GEMSTONE_DEBUG
+				snapshot.stone --extension=tode.dbf snapshots $GEMSTONE_DEBUG
 			popd
 		fi
   fold_end create_stone
