@@ -157,7 +157,7 @@ gemstone::prepare_stone() {
 			if [ ! -d "$todeHome" ]; then
 					mkdir "$todeHome"
 			fi
-			registerTodeSharedDir.solo -r $STONES_REGISTRY_NAME --todeHome=todeHome --populate
+			registerTodeSharedDir.solo -r $STONES_REGISTRY_NAME --todeHome=$todeHome --populate
 			createStone.solo --registry=$STONES_REGISTRY_NAME --template=default_tode \
 				--start $STONE_NAME ${gemstone_version} $GEMSTONE_DEBUG
 		fi
