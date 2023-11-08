@@ -66,6 +66,7 @@ gemstone::prepare_superDoit() {
 			export PATH="`pwd`/superDoit/bin:`pwd`/superDoit/examples/utility:$PATH"
 		popd
 	fi
+	echo "PATH=$PATH"
 	fold_start versionreport_superDoit "superDoit versionReport.solo..."
 		versionReport.solo
 	fold_end versionreport_superDoit
