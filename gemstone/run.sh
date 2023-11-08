@@ -111,6 +111,7 @@ gemstone::prepare_gsdevkit_stones() {
 			createRegistry.solo $STONES_REGISTRY_NAME --ensure $GEMSTONE_DEBUG
 			createProjectSet.solo --registry=$STONES_REGISTRY_NAME --projectSet=$STONES_PROJECT_SET_NAME \
 				                 --from=$STONES_GSDEVKITSTONES_ROOT/projectSets/$urlType/devkit.ston $GEMSTONE_DEBUG
+			registerProjectDirectory.solo --registry=$STONES_REGISTRY_NAME --projectDirectory=$STONES_PROJECTS_HOME  $GEMSTONE_DEBUG
 			cloneProjectsFromProjectSet.solo  --registry=$STONES_REGISTRY_NAME --projectSet=$STONES_PROJECT_SET_NAME \
 				                 --projectDirectory=$STONES_PROJECTS_HOME $GEMSTONE_DEBUG
 			registerProductDirectory.solo --registry=$STONES_REGISTRY_NAME \
@@ -157,7 +158,7 @@ gemstone::prepare_stone() {
 			if [ ! -d "$todeHome" ]; then
 					mkdir "$todeHome"
 			fi
-			registerTodeSharedDir.solo -r $STONES_REGISTRY_NAME --todeHome=$todeHome --populate
+			registerTodeSharedDir.solo -r $STONES_REGISTRY_NAME --todeHome=$todeHome --populate $GEMSTONE_DEBUG
 			createStone.solo --registry=$STONES_REGISTRY_NAME --template=default_tode \
 				--start $STONE_NAME ${gemstone_version} $GEMSTONE_DEBUG
 		fi
