@@ -153,7 +153,7 @@ gemstone::prepare_stone() {
 			newExtent.solo -r $STONES_REGISTRY_NAME -e $STONE_DIRECTORY/snapshots/extent0.tode.dbf $STONE_NAME $GEMSTONE_DEBUG
 			loadTode="false"
 		else
-			createStone.solo --registry=$STONES_REGISTRY_NAME --template=default_stone \
+			createStone.solo --registry=$STONES_REGISTRY_NAME --template=default \
 				--start $STONE_NAME ${gemstone_version} $GEMSTONE_DEBUG
 		fi
 		STONE_STARTED="TRUE"
