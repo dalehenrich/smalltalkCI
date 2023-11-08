@@ -48,7 +48,7 @@ echo "GEMSTONE_PRODUCT_NAME=$GEMSTONE_PRODUCT_NAME"
 gemstone::prepare_superDoit() {
 	if [ -d "$STONES_SUPERDOIT_ROOT" ]; then
 		pushd $STONES_SUPERDOIT_ROOT
-			export PATH="`pwd`/superDoit/bin:`pwd`/superDoit/examples/utility:$PATH"
+			export PATH="`pwd`/bin:`pwd`/examples/utility:$PATH"
 		popd
 	else
 		pushd $STONES_PROJECTS_HOME
