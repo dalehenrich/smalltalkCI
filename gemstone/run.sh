@@ -48,7 +48,9 @@ echo "GEMSTONE_PRODUCT_NAME=$GEMSTONE_PRODUCT_NAME"
 gemstone::prepare_superDoit() {
 	if [ -d "$STONES_SUPERDOIT_ROOT" ]; then
 		pushd $STONES_SUPERDOIT_ROOT
-			export PATH="`pwd`/bin:`pwd`/examples/utility:$PATH"
+			if [ -e "$STONES_SUPERDOIT_ROOT/gemstone/solo/product/version.txt" ] ; then
+				export PATH="`pwd`/bin:`pwd`/examples/utility:$PATH"
+			fi
 		popd
 	else
 		pushd $STONES_PROJECTS_HOME
@@ -63,12 +65,21 @@ gemstone::prepare_superDoit() {
 					fold_end install_superDoit_gemstone
 				fold_end clone_superDoit
 			fi
+			STONES_SUPERDOIT_ROOT=$STONES_PROJECTS_HOME/superDoit
 			export PATH="`pwd`/superDoit/bin:`pwd`/superDoit/examples/utility:$PATH"
 		popd
 	fi
 	echo "PATH=$PATH"
+	echo "superdoit_solo=`which superdoit_solo`"
 	fold_start versionreport_superDoit "superDoit versionReport.solo..."
+		set +e
 		versionReport.solo
+		status=$?
+		set -e
+		if [ "$status" != 0 ]; then
+			echo "$STONES_SUPERDOIT_ROOT was not properly installed, ensure that $STONES_SUPERDOIT_ROOT/bin/install.sh has been run. Check $STONES_SUPERDOIT_ROOT/gemstone/solo."
+			exit 1
+		fi
 	fold_end versionreport_superDoit
 }
 
