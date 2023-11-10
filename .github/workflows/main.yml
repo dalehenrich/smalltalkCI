@@ -21,7 +21,7 @@ jobs:
       matrix:
         os: [ ubuntu-20.04 ]
         smalltalk:
-#          - GemStone64-3.6.6
+          - GemStone64-3.6.6
           - GemStone64-3.7.0
 #          - Pharo64-11
 #        os: [ ubuntu-20.04, macos-latest, windows-2019 ]

@@ -69,9 +69,7 @@ gemstone::prepare_superDoit() {
 			STONES_SUPERDOIT_ROOT=$STONES_PROJECTS_HOME/superDoit
 		popd
 	fi
-	echo "PATH=$PATH"
 	export PATH="${STONES_SUPERDOIT_ROOT}/bin:${STONES_SUPERDOIT_ROOT}/examples/utility:$PATH"
-	echo "superdoit_solo=`which superdoit_solo`"
 	fold_start versionreport_superDoit "superDoit versionReport.solo..."
 		set +e
 		versionReport.solo
@@ -88,9 +86,9 @@ gemstone::prepare_superDoit() {
 # Prepare environment for running GemStone
 ################################################################################
 gemstone::prepare_gemstone() {
-echo "[Info] Creating /opt/gemstone directory"
   if [ ! -e /opt/gemstone ]
     then
+		echo "[Info] Creating /opt/gemstone directory"
     sudo mkdir -p /opt/gemstone /opt/gemstone/log /opt/gemstone/locks
     sudo chown $USER:${GROUPS[0]} /opt/gemstone /opt/gemstone/log /opt/gemstone/locks
     sudo chmod 770 /opt/gemstone /opt/gemstone/log /opt/gemstone/locks
@@ -178,10 +176,6 @@ gemstone::prepare_stone() {
 				--start $STONE_NAME ${gemstone_version} $GEMSTONE_DEBUG
 		fi
 		STONE_STARTED="TRUE"
-		echo "looking at $STONES_PROJECTS_HOME"
-		ls -altr $STONES_PROJECTS_HOME
-		echo "looking at $STONES_DIRECTORY"
-		ls -altr $STONES_DIRECTORY
 		if [ "$loadTode" = "true" ] ; then
 			pushd $STONE_DIRECTORY
 				loadTode.stone --projectDirectory=$STONES_PROJECTS_HOME $GEMSTONE_DEBUG
