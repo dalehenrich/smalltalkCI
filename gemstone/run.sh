@@ -48,8 +48,9 @@ echo "GEMSTONE_PRODUCT_NAME=$GEMSTONE_PRODUCT_NAME"
 gemstone::prepare_superDoit() {
 	if [ -d "$STONES_SUPERDOIT_ROOT" ]; then
 		pushd $STONES_SUPERDOIT_ROOT
-			if [ -e "$STONES_SUPERDOIT_ROOT/gemstone/solo/product/version.txt" ] ; then
-				export PATH="`pwd`/bin:`pwd`/examples/utility:$PATH"
+			if [ ! -e "$STONES_SUPERDOIT_ROOT/gemstone/solo/product/version.txt" ] ; then
+				echo "ERROR - Existing $STONES_SUPERDOIT_ROOT from --gs-GSDEVKITSTONES option has not bee installed correctly. Expected directory '$STONES_SUPERDOIT_ROOT/gemstone/solo/product' to exist'"
+				exit 1
 			fi
 		popd
 	else
@@ -66,10 +67,10 @@ gemstone::prepare_superDoit() {
 				fold_end clone_superDoit
 			fi
 			STONES_SUPERDOIT_ROOT=$STONES_PROJECTS_HOME/superDoit
-			export PATH="`pwd`/superDoit/bin:`pwd`/superDoit/examples/utility:$PATH"
 		popd
 	fi
 	echo "PATH=$PATH"
+	export PATH="${STONES_SUPERDOIT_ROOT}/bin:${STONES_SUPERDOIT_ROOT}/examples/utility:$PATH"
 	echo "superdoit_solo=`which superdoit_solo`"
 	fold_start versionreport_superDoit "superDoit versionReport.solo..."
 		set +e
@@ -103,14 +104,16 @@ echo "[Info] Creating /opt/gemstone directory"
 ################################################################################
 gemstone::prepare_gsdevkit_stones() {
 	fold_start clone_gsdevkit_stones "Cloning GsDevKit_stones..."
-		pushd "$STONES_PROJECTS_HOME"
-			if [ ! -d "$STONES_PROJECTS_HOME/GsDevKit_stones" ] ; then
-				git clone -b "${GSDEVKIT_STONES_BRANCH}" --depth 1 "${GSDEVKIT_STONES_DOWNLOAD}"
-				STONES_GSDEVKITSTONES_ROOT=$STONES_PROJECTS_HOME/GsDevKit_stones
-				echo STONES_GSDEVKITSTONES_ROOT=$STONES_GSDEVKITSTONES_ROOT
-			fi
-			export PATH="`pwd`/GsDevKit_stones/bin:$PATH"
-		popd
+		if [ "STONES_GSDEVKITSTONES_ROOT"x = "x" ]; then
+			pushd "$STONES_PROJECTS_HOME"
+				if [ ! -d "$STONES_PROJECTS_HOME/GsDevKit_stones" ] ; then
+					git clone -b "${GSDEVKIT_STONES_BRANCH}" --depth 1 "${GSDEVKIT_STONES_DOWNLOAD}"
+					STONES_GSDEVKITSTONES_ROOT=$STONES_PROJECTS_HOME/GsDevKit_stones
+				fi
+			popd
+		fi
+		echo STONES_GSDEVKITSTONES_ROOT=$STONES_GSDEVKITSTONES_ROOT
+		export PATH="${STONES_GSDEVKITSTONES_ROOT}/bin:$PATH"
 		if [ "$STONES_REGISTRY_NAME"x = "x" ]; then
 			# set up with default registry and default registry name
 			export STONES_DATA_HOME="$SMALLTALK_CI_BUILD/.stones_data_home"
