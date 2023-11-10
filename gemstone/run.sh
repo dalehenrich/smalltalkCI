@@ -104,16 +104,14 @@ echo "[Info] Creating /opt/gemstone directory"
 ################################################################################
 gemstone::prepare_gsdevkit_stones() {
 	fold_start clone_gsdevkit_stones "Cloning GsDevKit_stones..."
-		if [ "STONES_GSDEVKITSTONES_ROOT"x = "x" ]; then
+		if [ "$STONES_GSDEVKITSTONES_ROOT"x = "x" ]; then
 			pushd "$STONES_PROJECTS_HOME"
 				if [ ! -d "$STONES_PROJECTS_HOME/GsDevKit_stones" ] ; then
 					git clone -b "${GSDEVKIT_STONES_BRANCH}" --depth 1 "${GSDEVKIT_STONES_DOWNLOAD}"
-					STONES_GSDEVKITSTONES_ROOT=$STONES_PROJECTS_HOME/GsDevKit_stones
 				fi
+			STONES_GSDEVKITSTONES_ROOT=$STONES_PROJECTS_HOME/GsDevKit_stones
 			popd
 		fi
-		echo STONES_GSDEVKITSTONES_ROOT=$STONES_GSDEVKITSTONES_ROOT
-		echo PATH="$PATH"
 		export PATH="${STONES_GSDEVKITSTONES_ROOT}/bin:$PATH"
 		ls ${STONES_GSDEVKITSTONES_ROOT}/bin
 		if [ "$STONES_REGISTRY_NAME"x = "x" ]; then
