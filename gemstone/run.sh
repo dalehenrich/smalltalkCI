@@ -115,6 +115,7 @@ gemstone::prepare_gsdevkit_stones() {
 		echo STONES_GSDEVKITSTONES_ROOT=$STONES_GSDEVKITSTONES_ROOT
 		echo PATH="$PATH"
 		export PATH="${STONES_GSDEVKITSTONES_ROOT}/bin:$PATH"
+		ls ${STONES_GSDEVKITSTONES_ROOT}/bin
 		if [ "$STONES_REGISTRY_NAME"x = "x" ]; then
 			# set up with default registry and default registry name
 			export STONES_DATA_HOME="$SMALLTALK_CI_BUILD/.stones_data_home"
