@@ -381,11 +381,5 @@ gemstone::parse_options() {
 	if [ "$STONES_PROJECTS_HOME"x = "x" ]; then
 		STONES_PROJECTS_HOME="$SMALLTALK_CI_BUILD/repos"
 	fi
-	if [ "$STONES_SUPERDOIT_ROOT"x = "x" ] ; then
-		STONES_SUPERDOIT_ROOT=$STONES_PROJECTS_HOME/superDoit
-	fi
-	if [ "$STONES_GSDEVKITSTONES_ROOT"x = "x" ] ; then
-		STONES_GSDEVKITSTONES_ROOT=$STONES_PROJECTS_HOME/GsDevKit_stones
-	fi
 }
 
