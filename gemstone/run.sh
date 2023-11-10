@@ -113,6 +113,7 @@ gemstone::prepare_gsdevkit_stones() {
 			popd
 		fi
 		echo STONES_GSDEVKITSTONES_ROOT=$STONES_GSDEVKITSTONES_ROOT
+		echo PATH="$PATH"
 		export PATH="${STONES_GSDEVKITSTONES_ROOT}/bin:$PATH"
 		if [ "$STONES_REGISTRY_NAME"x = "x" ]; then
 			# set up with default registry and default registry name
