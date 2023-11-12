@@ -184,13 +184,13 @@ gemstone::prepare_stone() {
 			else
 				echo "string tests -> false"
 			fi
-			if [[ "$STONES_DISABLENATIVECODE" = "true" ]] && [[ $vers = "3.7.0" ]] && [[ "$PLATFORM" == "Darwin"*) ]]; then
+			if [[ "$STONES_DISABLENATIVECODE" = "true" ]] && [[ $vers = "3.7.0" ]] && [[ "$PLATFORM" == "Darwin"* ]]; then
 				echo "multiple clauses test -> true":
 			else
 				echo "multiple clauses test -> true":
 			fi
 			echo "======================================================="
-			if [[ "$STONES_DISABLENATIVECODE" = "true" ]] && [[ $vers = "3.7.0" ]] && [[ "$PLATFORM" == "Darwin"*) ]]; then
+			if [[ "$STONES_DISABLENATIVECODE" = "true" ]] && [[ $vers = "3.7.0" ]] && [[ "$PLATFORM" == "Darwin"* ]]; then
 				pushd $STONE_DIRECTORY
 					# on Darwin, it is necessary to disable native code when using 3.7.0 in certain cases, especially on github
 					echo "DISABLING NATIVE CODE"
