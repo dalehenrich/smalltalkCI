@@ -369,9 +369,10 @@ gemstone::parse_options() {
         STONES_GSDEVKITSTONES_ROOT="${1#*=}"
 				shift
         ;;
-			--gs-DISABLENATIVECODE)
-				STONES_DISABLENATIVECODE="true"
-				shift
+      --gs-DISABLENATIVECODE)
+        STONES_DISABLENATIVECODE="true"
+        shift
+        ;;
       --gs-*)
         print_error_and_exit "Unknown GemStone-specific option: $1"
         ;;
