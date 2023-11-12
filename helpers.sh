@@ -81,6 +81,10 @@ print_help() {
     --gs-DEBUG          Enable remote debugging of GsDevKit_stones .solo scripts
                         via topaz DEBUGGEM command.
 
+    --gs-DISABLENATIVECODE
+                        Disable use of native code in GemStone gems when running 3.7.0
+                        on Darwin. Noop when running on non-Darwin hosts. Related 
+                        to https://gemtalksystems.com/data/bugnotes/41550.html. 
     --gs-REGISTRY=<registry-name>
                         If not specified, a private registry will be created and 
                         populated. If specified, \$STONES_DATA_HOME and \$STONES_HOME

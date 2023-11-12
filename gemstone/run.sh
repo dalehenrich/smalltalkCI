@@ -11,6 +11,7 @@ local SUPERDOIT_DOWNLOAD=https://github.com/dalehenrich/superDoit.git
 local GSDEVKIT_STONES_BRANCH=v1.1.2
 local GSDEVKIT_STONES_DOWNLOAD=git@github.com:GsDevKit/GsDevKit_stones.git
 local GSDEVKIT_STONES_DOWNLOAD=https://github.com/GsDevKit/GsDevKit_stones.git
+local STONES_DISABLENATIVECODE="false"
 local STONES_REGISTRY_NAME=""
 local STONES_DIRECTORY=""
 local STONE_DIRECTORY=""
@@ -174,6 +175,15 @@ gemstone::prepare_stone() {
 			fi
 			createStone.solo --registry=$STONES_REGISTRY_NAME --template=default_tode \
 				--start $STONE_NAME ${gemstone_version} $GEMSTONE_DEBUG
+			if [ "$STONES_DISABLENATIVECODE" = "true" ]  && [ $vers = "3.7.0" ] && [ "$PLATFORM" = "Darwin"* ]; then
+				pushd $STONE_DIRECTORY
+					# on Darwin, it is necessary to disable native code when using 3.7.0 in certain cases, especially on github
+					echo "DISABLING NATIVE CODE"
+					cat -- >> gem.conf << EOF
+GEM_NATIVE_CODE_ENABLED = 0;
+EOF
+				popd
+			fi
 		fi
 		STONE_STARTED="TRUE"
 		if [ "$loadTode" = "true" ] ; then
@@ -359,6 +369,9 @@ gemstone::parse_options() {
         STONES_GSDEVKITSTONES_ROOT="${1#*=}"
 				shift
         ;;
+			--gs-DISABLENATIVECODE)
+				STONES_DISABLENATIVECODE="true"
+				shift
       --gs-*)
         print_error_and_exit "Unknown GemStone-specific option: $1"
         ;;

@@ -19,7 +19,7 @@ jobs:
   build:
     strategy:
       matrix:
-        os: [ ubuntu-20.04 ]
+        os: [ ubuntu-20.04, macos-latest ]
         smalltalk:
           - GemStone64-3.6.6
           - GemStone64-3.7.0
@@ -94,7 +94,7 @@ jobs:
         run: |
           export CI="true"
           tests/all_tests.sh
-          bin/smalltalkci -s ${{ matrix.smalltalk }} --self-test
+          bin/smalltalkci --gs-DISABLENATIVECODE --s ${{ matrix.smalltalk }} --self-test
         shell: bash
         if: contains(matrix.smalltalk, 'trunk') == false && contains(matrix.smalltalk, 'alpha') == false && contains(matrix.smalltalk, 'Squeak32-6.0') == false && contains(matrix.smalltalk, 'GToolkit64') == false
         timeout-minutes: ${{ matrix.timeout-minutes }}
