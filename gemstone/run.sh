@@ -175,6 +175,16 @@ gemstone::prepare_stone() {
 			fi
 			createStone.solo --registry=$STONES_REGISTRY_NAME --template=default_tode \
 				--start $STONE_NAME ${gemstone_version} $GEMSTONE_DEBUG
+			echo "======================================================="
+			echo "STONES_DISABLENATIVECODE=$STONES_DISABLENATIVECODE"
+			echo "vers=$vers"
+			echo "PLATFORM=$PLATFORM"
+			if [ "$PLATFORM" = "Darwin"* ]; then
+				echo true
+			else
+				echo false
+			fi
+			echo "======================================================="
 			if [ "$STONES_DISABLENATIVECODE" = "true" ]  && [ $vers = "3.7.0" ] && [ "$PLATFORM" = "Darwin"* ]; then
 				pushd $STONE_DIRECTORY
 					# on Darwin, it is necessary to disable native code when using 3.7.0 in certain cases, especially on github
