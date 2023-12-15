@@ -402,7 +402,7 @@ prepare_folders() {
 ################################################################################
 prepare_environment() {
   add_env_vars
-  if is_linux_build && is_sudo_enabled; then
+  if ! is_internal_gemstone_build && is_linux_build && is_sudo_enabled; then
     raise_rtprio_limit
   fi
 }

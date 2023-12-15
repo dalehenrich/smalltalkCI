@@ -212,6 +212,10 @@ hardware_platform() {
   echo "$(uname -m)"
 }
 
+is_internal_gemstone_build() {
+  [[ "${GEMSTONE_BATTERY_CI:-}" = "true" ]]
+}
+
 is_sudo_enabled() {
   $(sudo -n true > /dev/null 2>&1)
 }

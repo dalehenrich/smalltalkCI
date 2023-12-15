@@ -87,15 +87,17 @@ gemstone::prepare_superDoit() {
 # Prepare environment for running GemStone
 ################################################################################
 gemstone::prepare_gemstone() {
-  if [ ! -e /opt/gemstone ]
+  if ! is_internal_gemstone_build; then
+    if [ ! -e /opt/gemstone ]
     then
-		echo "[Info] Creating /opt/gemstone directory"
-    sudo mkdir -p /opt/gemstone /opt/gemstone/log /opt/gemstone/locks
-    sudo chown $USER:${GROUPS[0]} /opt/gemstone /opt/gemstone/log /opt/gemstone/locks
-    sudo chmod 770 /opt/gemstone /opt/gemstone/log /opt/gemstone/locks
-  else
-    echo "[Warning] /opt/gemstone directory already exists"
-    echo "to replace it, remove or rename it and rerun this script"
+      echo "[Info] Creating /opt/gemstone directory"
+      sudo mkdir -p /opt/gemstone /opt/gemstone/log /opt/gemstone/locks
+      sudo chown $USER:${GROUPS[0]} /opt/gemstone /opt/gemstone/log /opt/gemstone/locks
+      sudo chmod 770 /opt/gemstone /opt/gemstone/log /opt/gemstone/locks
+    else
+      echo "[Warning] /opt/gemstone directory already exists"
+      echo "to replace it, remove or rename it and rerun this script"
+    fi
   fi
 }
 ################################################################################
