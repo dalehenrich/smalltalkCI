@@ -124,7 +124,7 @@ moose::get_image_url() {
       echo "https://github.com/moosetechnology/Moose/releases/download/v9.x.x/Moose9-stable-Pharo64-9.0.zip"
       ;;
     "Moose64-10"*)
-      echo "https://github.com/moosetechnology/Moose/releases/download/continuous/Moose10-development-Pharo64-10.zip"
+      echo "https://github.com/moosetechnology/Moose/releases/download/v10.x.x/Moose10-stable-Pharo64-10.zip"
       ;;
     "Moose64-11"*)
       echo "https://github.com/moosetechnology/Moose/releases/download/continuous/Moose11-development-Pharo64-11.zip"
@@ -247,7 +247,7 @@ pharo::prepare_vm() {
     pushd "${config_vm_dir}" > /dev/null
     fold_start download_vm "Downloading ${smalltalk_name} vm..."
       download_file "${pharo_vm_url}" "${pharo_zeroconf}"
-      bash "${pharo_zeroconf}"
+      retry 3 "bash ${pharo_zeroconf}"
     fold_end download_vm
     popd > /dev/null
   fi
@@ -283,7 +283,7 @@ pharo::prepare_image() {
     pushd "${target}" > /dev/null
     fold_start download_image "Downloading ${smalltalk_name} image..."
       download_file "${pharo_image_url}" "${pharo_zeroconf}"
-      bash "${pharo_zeroconf}"
+      retry 3 "bash ${pharo_zeroconf}"
     fold_end download_image
     popd > /dev/null
   fi
