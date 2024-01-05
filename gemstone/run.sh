@@ -240,7 +240,11 @@ gemstone::test_project() {
 
   fold_start run_tests "Running project tests..."
  	pushd $STONE_DIRECTORY
-		testSmalltalkCIProject.stone  --buildDirectory=$SMALLTALK_CI_BUILD --config_ston=${config_ston} --named='${config_smalltalk} Server (${STONE_NAME})' $GEMSTONE_DEBUG
+		local debugGem=""
+		if [ "$GEMSTONE_DEBUG"x != "x" ]; then
+			debugGem=" --debugGem"
+		fi
+		testSmalltalkCIProject.stone  --buildDirectory=$SMALLTALK_CI_BUILD --config_ston=${config_ston} --named="${config_smalltalk} Server (${STONE_NAME})" $GEMSTONE_DEBUG $debugGem
 		status=$?
 	popd
 
