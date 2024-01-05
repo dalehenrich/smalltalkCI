@@ -1,6 +1,10 @@
 {
 	"class" : {
-		 },
+		"debugClasses:spec:" : "dkh 01/05/2024 13:30",
+		"debugSpec:" : "dkh 01/05/2024 13:29",
+		"debugSuite:spec:" : "dkh 01/05/2024 13:31" },
 	"instance" : {
+		"debug" : "dkh 01/05/2024 13:32",
+		"debugAll" : "dkh 01/05/2024 13:32",
 		"serializeError:of:" : "dkh 12/07/2016 16:22",
 		"stackTraceString:of:" : "fn 9/27/2016 15:08" } }
