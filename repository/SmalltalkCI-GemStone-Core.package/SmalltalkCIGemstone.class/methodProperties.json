@@ -34,7 +34,7 @@
 		"testRunnerClass" : "fn 9/27/2016 15:15",
 		"workingDirectory" : "fn 10/16/2016 16:31" },
 	"instance" : {
-		"debuTests" : "dkh 01/05/2024 13:26",
+		"debugTests" : "dkh 01/05/2024 13:53",
 		"imageInfo" : "fn 10/21/2016 16:28",
 		"initialize" : "fn 10/4/2016 14:00",
 		"performMetacelloLoad:" : "dkh 04/11/2016 09:56",

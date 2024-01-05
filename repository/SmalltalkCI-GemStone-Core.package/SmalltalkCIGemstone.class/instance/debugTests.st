@@ -1,3 +1,3 @@
 executing
-debuTests
+debugTests
   ^ self class testRunnerClass debugSpec: self spec
