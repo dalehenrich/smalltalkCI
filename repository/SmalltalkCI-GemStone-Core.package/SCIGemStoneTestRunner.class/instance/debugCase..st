@@ -18,8 +18,10 @@ debugCase: aTestCase
                 ifTrue: [ 
                   (System respondsTo: #'waitForDebug')
                     ifTrue: [ 
-                      "expect to be doing remote debugging with topaz debuggem command (3.7.0 and beyond)"
-                      System perform: #'waitForDebug' ]
+                      SmalltalkCI
+                        printToStdout:
+                          'Debug unexpected test failure for ' , aTestCase printString.
+                      System perform: #'waitForDebug'	"expect to be doing remote debugging with topaz debuggem command (3.7.0 and beyond)" ]
                     ifFalse: [ 
                       (self spec testing at: #'serializeError' ifAbsent: [ true ])
                         ifTrue: [ self serializeError: result testError of: aTestCase ].
