@@ -81,10 +81,26 @@ print_help() {
     --gs-DEBUG          Enable remote debugging of GsDevKit_stones .solo scripts
                         via topaz DEBUGGEM command.
 
+    --gs-DEBUGSUITE     Enable remote debugging of test failures via topaz DEBUGGEM command.
+                        `System waitForDebug` executed when an unexpected test result
+                        is encountered. Useful for debugging test failures that don't
+                        reproduce when test is run interactively.
+
     --gs-DISABLENATIVECODE
                         Disable use of native code in GemStone gems when running 3.7.0
                         on Darwin. Noop when running on non-Darwin hosts. Related 
                         to https://gemtalksystems.com/data/bugnotes/41550.html. 
+
+    --gs-GSDEVKITSTONES
+                       Specify root directory of the GsDevKit_stones project to be used.
+                       Project will be cloned from GitHub for each run. If --gs-REPOS
+                       is specified, the project will be expected to be present in that
+                       directory. 
+
+    --gs-PROJECTNAME
+                       Specify the name of the project under test. Mainly used to improve
+                       the quality of log messages.
+
     --gs-REGISTRY=<registry-name>
                         If not specified, a private registry will be created and 
                         populated. If specified, \$STONES_DATA_HOME and \$STONES_HOME
@@ -95,12 +111,6 @@ print_help() {
     --gs-REPOS=<gemstone-server-git-projects>
                         Specify directory containing existing server projects to be 
                         used instead of cloning projects from GitHub for each run.
-
-    --gs-GSDEVKITSTONES
-                       Specify root directory of the GsDevKit_stones project to be used.
-                       Project will be cloned from GitHub for each run. If --gs-REPOS
-                       is specified, the project will be expected to be present in that
-                       directory. 
 
 		--gs-SUPERDOIT
                        Specify root directory of the superDoit project to be used.

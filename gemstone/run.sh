@@ -19,6 +19,8 @@ local STONE_STARTED=""
 local STONES_PROJECTS_HOME=""
 local STONES_PROJECT_SET_NAME=devkit
 local GEMSTONE_DEBUG=""
+local GEMSTONE_DEBUGSUITE=""
+local PROJECT_NAME=""
 local STONES_SUPERDOIT_ROOT=""
 local STONES_GSDEVKITSTONES_ROOT=""
 
@@ -244,7 +246,7 @@ gemstone::test_project() {
 		if [ "$GEMSTONE_DEBUG"x != "x" ]; then
 			debugGem=" --debugGem"
 		fi
-		testSmalltalkCIProject.stone  --buildDirectory=$SMALLTALK_CI_BUILD --config_ston=${config_ston} --named="${config_smalltalk} Server (${STONE_NAME})" $GEMSTONE_DEBUG $debugGem
+		testSmalltalkCIProject.stone  --buildDirectory=$SMALLTALK_CI_BUILD --config_ston=${config_ston} --named="$PROJECT_NAME" $GEMSTONE_DEBUG $debugGem $GEMSTONE_DEBUGSUITE
 		status=$?
 	popd
 
@@ -359,7 +361,19 @@ gemstone::parse_options() {
         GEMSTONE_DEBUG=" --debug"
 				shift
         ;;
-      --gs-REGISTRY=*)
+      --gs-DEBUGSUITE)
+        GEMSTONE_DEBUGSUITE=" --debugSuite"
+				shift
+        ;;
+      --gs-PROJECTNAME=*)
+        PROJECT_NAME="${1#*=}"
+				shift
+        ;;
+     --gs-REGISTRY=*)
+        STONES_REGISTRY_NAME="${1#*=}"
+				shift
+        ;;
+     --gs-REGISTRY=*)
         STONES_REGISTRY_NAME="${1#*=}"
 				shift
         ;;
@@ -393,6 +407,9 @@ gemstone::parse_options() {
 
 	if [ "$STONES_PROJECTS_HOME"x = "x" ]; then
 		STONES_PROJECTS_HOME="$SMALLTALK_CI_BUILD/repos"
+	fi
+	if [ "$PROJECT_NAME"x = "x" ]; then
+		PROJECT_NAME="${config_smalltalk}-(${STONE_NAME})"
 	fi
 }
 
