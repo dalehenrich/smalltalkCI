@@ -16,8 +16,14 @@ debugCase: aTestCase
               result testError: err.
               aTestCase shouldPass
                 ifTrue: [ 
-                  "expect to be doing remote debugging with topaz debuggem command"
-                  System waitForDebug ] ] ]
+                  (System respondsTo: #'waitForDebug')
+                    ifTrue: [ 
+                      "expect to be doing remote debugging with topaz debuggem command (3.7.0 and beyond)"
+                      System perform: #'waitForDebug' ]
+                    ifFalse: [ 
+                      (self spec testing at: #'serializeError' ifAbsent: [ true ])
+                        ifTrue: [ self serializeError: result testError of: aTestCase ].
+                      result stack: (self stackTraceString: err of: aTestCase) ] ] ] ]
             on: self class skipExceptions
             do: [ :skip | result skipped: true ] ]).
   self printProgress: result.
